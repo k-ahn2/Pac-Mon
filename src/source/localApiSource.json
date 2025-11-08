@@ -1,0 +1,3501 @@
+{
+  "data": [
+    {
+      "id": 2193430,
+      "timestamp": "2025-10-18T09:53:58.076Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "8",
+        "srce": "CT1NET",
+        "dest": "POR001-8",
+        "ctrl": 60,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 1,
+        "tseq": 6,
+        "pf": "P",
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 20,
+        "l3type": "NetRom",
+        "l3src": "CT1NET",
+        "l3dst": "KEEPLI",
+        "ttl": 1,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 0,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193429,
+      "timestamp": "2025-10-18T09:53:58.067Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "8",
+        "srce": "POR001-8",
+        "dest": "CT1NET",
+        "ctrl": 241,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 7,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193428,
+      "timestamp": "2025-10-18T09:53:57.965Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "29",
+        "srce": "POR001-7",
+        "dest": "POR001-8",
+        "ctrl": 81,
+        "l2type": "RR",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 2,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193427,
+      "timestamp": "2025-10-18T09:53:57.957Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "29",
+        "srce": "POR001-8",
+        "dest": "POR001-7",
+        "ctrl": 49,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 1,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193426,
+      "timestamp": "2025-10-18T09:53:57.757Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "40",
+        "srce": "ZL2BAU-3",
+        "dest": "K5DAT-5",
+        "ctrl": 225,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 7,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193425,
+      "timestamp": "2025-10-18T09:53:57.586Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "5",
+        "srce": "G7VJA-5",
+        "dest": "K5DAT-5",
+        "ctrl": 225,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 7,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193424,
+      "timestamp": "2025-10-18T09:53:57.56Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "40",
+        "srce": "K5DAT-5",
+        "dest": "ZL2BAU-3",
+        "ctrl": 108,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 3,
+        "tseq": 6,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 193,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "WQ6N-3",
+            "alias": "SEE",
+            "hops": 3,
+            "tt": 45
+          },
+          {
+            "call": "K5DAT-7",
+            "alias": "SHAWNO",
+            "hops": 2,
+            "tt": 33
+          },
+          {
+            "call": "GB7BDH",
+            "alias": "SWINDN",
+            "hops": 3,
+            "tt": 10,
+            "latitude": 51.2875,
+            "longitude": -1.525,
+            "software": "XRPi",
+            "isNode": true,
+            "isPMS": true,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T22:48:55+00:00"
+          },
+          {
+            "call": "G7TAJ-1",
+            "alias": "TANK2",
+            "hops": 3,
+            "tt": 6,
+            "latitude": 51.1137,
+            "longitude": -3.0125,
+            "software": "XRPi",
+            "isNode": true,
+            "isPMS": true,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T22:48:19+00:00"
+          },
+          {
+            "call": "G7TAJ-10",
+            "alias": "TNKCHT",
+            "hops": 3,
+            "tt": 6,
+            "latitude": 51.1137,
+            "longitude": -3.0125,
+            "software": "XRPi",
+            "isNode": false,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T22:48:19+00:00"
+          },
+          {
+            "call": "G7TAJ-11",
+            "alias": "TPMS",
+            "hops": 3,
+            "tt": 6,
+            "latitude": 51.1137,
+            "longitude": -3.0125,
+            "software": "XRPi",
+            "isNode": false,
+            "isPMS": true,
+            "timestamp": "2025-10-18T22:48:19+00:00"
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193423,
+      "timestamp": "2025-10-18T09:53:57.362Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "5",
+        "srce": "K5DAT-5",
+        "dest": "G7VJA-5",
+        "ctrl": 172,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 5,
+        "tseq": 6,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 193,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "WQ6N-3",
+            "alias": "SEE",
+            "hops": 3,
+            "tt": 45
+          },
+          {
+            "call": "K5DAT-7",
+            "alias": "SHAWNO",
+            "hops": 2,
+            "tt": 33
+          },
+          {
+            "call": "GB7BDH",
+            "alias": "SWINDN",
+            "hops": 3,
+            "tt": 10,
+            "latitude": 51.2875,
+            "longitude": -1.525,
+            "software": "XRPi",
+            "isNode": true,
+            "isPMS": true,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T10:48:55+00:00"
+          },
+          {
+            "call": "G7TAJ-1",
+            "alias": "TANK2",
+            "hops": 3,
+            "tt": 6,
+            "latitude": 51.1137,
+            "longitude": -3.0125,
+            "software": "XRPi",
+            "isNode": true,
+            "isPMS": true,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T10:48:19+00:00"
+          },
+          {
+            "call": "G7TAJ-10",
+            "alias": "TNKCHT",
+            "hops": 3,
+            "tt": 6,
+            "latitude": 51.1137,
+            "longitude": -3.0125,
+            "software": "XRPi",
+            "isNode": false,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T10:48:19+00:00"
+          },
+          {
+            "call": "G7TAJ-11",
+            "alias": "TPMS",
+            "hops": 3,
+            "tt": 6,
+            "latitude": 51.1137,
+            "longitude": -3.0125,
+            "software": "XRPi",
+            "isNode": false,
+            "isPMS": true,
+            "timestamp": "2025-10-18T10:48:19+00:00"
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193422,
+      "timestamp": "2025-10-18T09:53:57.317Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "25",
+        "srce": "ZL2BAU-3",
+        "dest": "VE2PKT-4",
+        "ctrl": 161,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 5,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193421,
+      "timestamp": "2025-10-18T09:53:57.241Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "3",
+        "srce": "VE2PKT-4",
+        "dest": "G7VJA-5",
+        "ctrl": 161,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 5,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193420,
+      "timestamp": "2025-10-18T09:53:57.135Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "25",
+        "srce": "VE2PKT-4",
+        "dest": "ZL2BAU-3",
+        "ctrl": 72,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 2,
+        "tseq": 4,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 112,
+        "l3type": "NetRom",
+        "l3src": "VE2PKT-4",
+        "l3dst": "L3RTT",
+        "ttl": 2,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 92,
+        "payload": "L3RTT:      16956         12         12      25524 PKTXRP LEVEL3_V2.1 XRouter504i $M5000 $N",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193419,
+      "timestamp": "2025-10-18T09:53:57.126Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "25",
+        "srce": "ZL2BAU-3",
+        "dest": "VE2PKT-4",
+        "ctrl": 164,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 5,
+        "tseq": 2,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 112,
+        "l3type": "NetRom",
+        "l3src": "VE2PKT-4",
+        "l3dst": "L3RTT",
+        "ttl": 1,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 92,
+        "payload": "L3RTT:      16956         12         12      25524 PKTXRP LEVEL3_V2.1 XRouter504i $M5000 $N",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193418,
+      "timestamp": "2025-10-18T09:53:57.108Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "10",
+        "srce": "AT2SN",
+        "dest": "POR001-8",
+        "ctrl": 206,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 6,
+        "tseq": 7,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 12,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "DNX540",
+            "hops": 16,
+            "tt": 795
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193417,
+      "timestamp": "2025-10-18T09:53:57.093Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "3",
+        "srce": "G7VJA-5",
+        "dest": "VE2PKT-4",
+        "ctrl": 97,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 3,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193416,
+      "timestamp": "2025-10-18T09:53:56.913Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "3",
+        "srce": "G7VJA-5",
+        "dest": "VE2PKT-4",
+        "ctrl": 104,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 3,
+        "tseq": 4,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 112,
+        "l3type": "NetRom",
+        "l3src": "VE2PKT-4",
+        "l3dst": "L3RTT",
+        "ttl": 1,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 92,
+        "payload": "L3RTT:      16956          3          3      25524 PKTXRP LEVEL3_V2.1 XRouter504i $M5000 $N",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193415,
+      "timestamp": "2025-10-18T09:53:56.906Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "3",
+        "srce": "VE2PKT-4",
+        "dest": "G7VJA-5",
+        "ctrl": 132,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 4,
+        "tseq": 2,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 112,
+        "l3type": "NetRom",
+        "l3src": "VE2PKT-4",
+        "l3dst": "L3RTT",
+        "ttl": 2,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 92,
+        "payload": "L3RTT:      16956          3          3      25524 PKTXRP LEVEL3_V2.1 XRouter504i $M5000 $N",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193414,
+      "timestamp": "2025-10-18T09:53:56.712Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "13",
+        "srce": "NOD001",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 238,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "NODE31",
+        "nodes": [
+          {
+            "call": "DNQ476",
+            "alias": "PIRNA3",
+            "via": "NOD073",
+            "qual": 232
+          },
+          {
+            "call": "FRA160-8",
+            "alias": "FRA160",
+            "via": "AP1NOD",
+            "qual": 184
+          },
+          {
+            "call": "NL3PRC",
+            "alias": "RPCBBS",
+            "via": "NOD073",
+            "qual": 206
+          },
+          {
+            "call": "DBX601",
+            "alias": "dbx601",
+            "via": "CB0GM-14",
+            "qual": 189
+          },
+          {
+            "call": "DNN206",
+            "alias": "WOlNET",
+            "via": "CB0GM-14",
+            "qual": 189
+          },
+          {
+            "call": "BLM274",
+            "alias": "blm274",
+            "via": "CB0GM-14",
+            "qual": 190
+          },
+          {
+            "call": "DLM274",
+            "alias": "dlm274",
+            "via": "CB0GM-14",
+            "qual": 190
+          },
+          {
+            "call": "CB0GM-14",
+            "alias": "WIEHL",
+            "via": "CB0GM-14",
+            "qual": 255
+          },
+          {
+            "call": "LR1NET",
+            "alias": "JO32PC",
+            "via": "CB0GM-14",
+            "qual": 253
+          },
+          {
+            "call": "NL5VKL-2",
+            "alias": "UDNTNN",
+            "via": "AP1NOD",
+            "qual": 253
+          },
+          {
+            "call": "SV8BBS",
+            "alias": "SV8BBS",
+            "via": "LK0NOD",
+            "qual": 253
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193413,
+      "timestamp": "2025-10-18T09:53:56.078Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "9",
+        "srce": "NL5VKL-2",
+        "dest": "POR001-8",
+        "ctrl": 94,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 2,
+        "tseq": 7,
+        "pf": "P",
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 89,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "CT7NOD",
+            "hops": 13,
+            "tt": 60000
+          },
+          {
+            "call": "CC0NET",
+            "hops": 5,
+            "tt": 60000
+          },
+          {
+            "call": "CB0PLS",
+            "hops": 5,
+            "tt": 60000
+          },
+          {
+            "call": "DAC476-2",
+            "hops": 7,
+            "tt": 60000
+          },
+          {
+            "call": "D0HHH",
+            "hops": 3,
+            "tt": 60000
+          },
+          {
+            "call": "DNO284",
+            "hops": 4,
+            "tt": 60000
+          },
+          {
+            "call": "DNO349",
+            "hops": 6,
+            "tt": 60000
+          },
+          {
+            "call": "DIGN0D",
+            "hops": 8,
+            "tt": 60000
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193412,
+      "timestamp": "2025-10-18T09:53:56.069Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "9",
+        "srce": "POR001-8",
+        "dest": "NL5VKL-2",
+        "ctrl": 25,
+        "l2type": "REJ",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 0,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193411,
+      "timestamp": "2025-10-18T09:53:55.859Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "9",
+        "srce": "NL5VKL-2",
+        "dest": "POR001-8",
+        "ctrl": 78,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 2,
+        "tseq": 7,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 89,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "CT7NOD",
+            "hops": 13,
+            "tt": 60000
+          },
+          {
+            "call": "CC0NET",
+            "hops": 5,
+            "tt": 60000
+          },
+          {
+            "call": "CB0PLS",
+            "hops": 5,
+            "tt": 60000
+          },
+          {
+            "call": "DAC476-2",
+            "hops": 7,
+            "tt": 60000
+          },
+          {
+            "call": "D0HHH",
+            "hops": 3,
+            "tt": 60000
+          },
+          {
+            "call": "DNO284",
+            "hops": 4,
+            "tt": 60000
+          },
+          {
+            "call": "DNO349",
+            "hops": 6,
+            "tt": 60000
+          },
+          {
+            "call": "DIGN0D",
+            "hops": 8,
+            "tt": 60000
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193410,
+      "timestamp": "2025-10-18T09:53:55.655Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "3",
+        "srce": "KS0NOD",
+        "dest": "POR001-8",
+        "ctrl": 225,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 7,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193409,
+      "timestamp": "2025-10-18T09:53:55.59Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "10",
+        "srce": "POR001-8",
+        "dest": "AT2SN",
+        "ctrl": 234,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 7,
+        "tseq": 5,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 12,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "DNX540",
+            "hops": 31,
+            "tt": 60000
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193408,
+      "timestamp": "2025-10-18T09:53:55.582Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "3",
+        "srce": "POR001-8",
+        "dest": "KS0NOD",
+        "ctrl": 172,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 5,
+        "tseq": 6,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 12,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "CT7NOD",
+            "hops": 31,
+            "tt": 60000
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193407,
+      "timestamp": "2025-10-18T09:53:55.059Z",
+      "report": {
+        "reportFrom": "DNX284",
+        "port": "2",
+        "srce": "DOK346",
+        "dest": "DNX284",
+        "ctrl": 1,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 0,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193406,
+      "timestamp": "2025-10-18T09:53:55.049Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "5",
+        "srce": "K5DAT-5",
+        "dest": "G7VJA-5",
+        "ctrl": 161,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 5,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193405,
+      "timestamp": "2025-10-18T09:53:55.042Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "33",
+        "srce": "AE5E-14",
+        "dest": "ZL2BAU-3",
+        "ctrl": 177,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 5,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193404,
+      "timestamp": "2025-10-18T09:53:55.013Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "36",
+        "srce": "SV1DZI-8",
+        "dest": "ZL2BAU-3",
+        "ctrl": 113,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 3,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193403,
+      "timestamp": "2025-10-18T09:53:54.954Z",
+      "report": {
+        "reportFrom": "DNX284",
+        "port": "2",
+        "srce": "DNX284",
+        "dest": "DOK346",
+        "ctrl": 78,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 2,
+        "tseq": 7,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 34,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "CT7NOD",
+            "hops": 31,
+            "tt": 60000
+          },
+          {
+            "call": "DAC476-2",
+            "hops": 31,
+            "tt": 60000
+          },
+          {
+            "call": "DNX540",
+            "hops": 31,
+            "tt": 60000
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193402,
+      "timestamp": "2025-10-18T09:53:54.728Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "5",
+        "srce": "G7VJA-5",
+        "dest": "K5DAT-5",
+        "ctrl": 200,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 6,
+        "tseq": 4,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 12,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "VE2PKT-4",
+            "hops": 31,
+            "tt": 60000
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193401,
+      "timestamp": "2025-10-18T09:53:54.616Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "33",
+        "srce": "ZL2BAU-3",
+        "dest": "AE5E-14",
+        "ctrl": 17,
+        "l2type": "RR",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 0,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193400,
+      "timestamp": "2025-10-18T09:53:54.512Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "36",
+        "srce": "ZL2BAU-3",
+        "dest": "SV1DZI-8",
+        "ctrl": 209,
+        "l2type": "RR",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 6,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193399,
+      "timestamp": "2025-10-18T09:53:54.414Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "3",
+        "srce": "POR001-8",
+        "dest": "KS0NOD",
+        "ctrl": 185,
+        "l2type": "REJ",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 5,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193398,
+      "timestamp": "2025-10-18T09:53:54.406Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "3",
+        "srce": "KS0NOD",
+        "dest": "POR001-8",
+        "ctrl": 216,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 6,
+        "tseq": 4,
+        "pf": "P",
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 23,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "DAC476-2",
+            "hops": 12,
+            "tt": 584
+          },
+          {
+            "call": "CB0GER",
+            "hops": 3,
+            "tt": 60000
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193397,
+      "timestamp": "2025-10-18T09:53:54.288Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "2",
+        "srce": "GB7COW-11",
+        "dest": "QST",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "V1",
+        "modulo": 8,
+        "pid": 205,
+        "ptcl": "ARP",
+        "ilen": 30,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193396,
+      "timestamp": "2025-10-18T09:53:54.22Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "3",
+        "srce": "KS0NOD",
+        "dest": "POR001-8",
+        "ctrl": 200,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 6,
+        "tseq": 4,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 23,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "DAC476-2",
+            "hops": 12,
+            "tt": 584
+          },
+          {
+            "call": "CB0GER",
+            "hops": 3,
+            "tt": 60000
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193395,
+      "timestamp": "2025-10-18T09:53:53.995Z",
+      "report": {
+        "reportFrom": "DNX284",
+        "port": "2",
+        "srce": "DOK346",
+        "dest": "DNX284",
+        "ctrl": 226,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 7,
+        "tseq": 1,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 34,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "DNX540",
+            "hops": 9,
+            "tt": 959
+          },
+          {
+            "call": "CT7NOD",
+            "hops": 12,
+            "tt": 510
+          },
+          {
+            "call": "DAC476-2",
+            "hops": 12,
+            "tt": 510
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193394,
+      "timestamp": "2025-10-18T09:53:53.754Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "6",
+        "srce": "POR001-8",
+        "dest": "CB0SAW",
+        "ctrl": 129,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 4,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193393,
+      "timestamp": "2025-10-18T09:53:53.582Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "10",
+        "srce": "POR001-8",
+        "dest": "AT2SN",
+        "ctrl": 225,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 7,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193392,
+      "timestamp": "2025-10-18T09:53:53.474Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "3",
+        "srce": "POR001-8",
+        "dest": "KS0NOD",
+        "ctrl": 129,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 4,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193391,
+      "timestamp": "2025-10-18T09:53:53.256Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "5",
+        "srce": "POR001-8",
+        "dest": "AX25N0",
+        "ctrl": 161,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 5,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193390,
+      "timestamp": "2025-10-18T09:53:53.217Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "9",
+        "srce": "POR001-8",
+        "dest": "NL5VKL-2",
+        "ctrl": 225,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 7,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193389,
+      "timestamp": "2025-10-18T09:53:53.209Z",
+      "report": {
+        "reportFrom": "GB7NOT-2",
+        "port": "2",
+        "srce": "MB7UNM",
+        "dest": "GB7NOT-2",
+        "ctrl": 81,
+        "l2type": "RR",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 2,
+        "tseq": 0,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193388,
+      "timestamp": "2025-10-18T09:53:53.085Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "7",
+        "srce": "POR001-8",
+        "dest": "DIG233",
+        "ctrl": 161,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 5,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193387,
+      "timestamp": "2025-10-18T09:53:52.428Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "6",
+        "srce": "CB0SAW",
+        "dest": "POR001-8",
+        "ctrl": 65,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 2,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193386,
+      "timestamp": "2025-10-18T09:53:52.329Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "6",
+        "srce": "POR001-8",
+        "dest": "CB0SAW",
+        "ctrl": 130,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 4,
+        "tseq": 1,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 256,
+        "l3type": "NetRom",
+        "l3src": "CB0SAW",
+        "l3dst": "L3RTT",
+        "ttl": 1,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 236,
+        "payload": "L3RTT:  294834300         39         39 1451274672 JO52NU LEVEL3_V2.1 TNN179 $M360 $N\r                                                                                                                                                     ",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193385,
+      "timestamp": "2025-10-18T09:53:52.322Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "6",
+        "srce": "CB0SAW",
+        "dest": "POR001-8",
+        "ctrl": 38,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 1,
+        "tseq": 3,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 256,
+        "l3type": "NetRom",
+        "l3src": "CB0SAW",
+        "l3dst": "L3RTT",
+        "ttl": 2,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 236,
+        "payload": "L3RTT:  294834300         39         39 1451274672 JO52NU LEVEL3_V2.1 TNN179 $M360 $N\r                                                                                                                                                     ",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193384,
+      "timestamp": "2025-10-18T09:53:52.122Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "10",
+        "srce": "AT2SN",
+        "dest": "POR001-8",
+        "ctrl": 172,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 5,
+        "tseq": 6,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 23,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "CT7NOD",
+            "hops": 11,
+            "tt": 971
+          },
+          {
+            "call": "DNX540",
+            "hops": 13,
+            "tt": 680
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193383,
+      "timestamp": "2025-10-18T09:53:52.114Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "3",
+        "srce": "KS0NOD",
+        "dest": "POR001-8",
+        "ctrl": 193,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 6,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193382,
+      "timestamp": "2025-10-18T09:53:52.047Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "3",
+        "srce": "KS0NOD",
+        "dest": "POR001-8",
+        "ctrl": 166,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 5,
+        "tseq": 3,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 256,
+        "l3type": "NetRom",
+        "l3src": "KS0NOD",
+        "l3dst": "L3RTT",
+        "ttl": 2,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 236,
+        "payload": "L3RTT: 1019055404         48         48  135513184 KS0NOD LEVEL3_V2.1 TNN179 $M1000 $N\r                                                                                                                                                    ",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193381,
+      "timestamp": "2025-10-18T09:53:52.039Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "3",
+        "srce": "POR001-8",
+        "dest": "KS0NOD",
+        "ctrl": 138,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 4,
+        "tseq": 5,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 256,
+        "l3type": "NetRom",
+        "l3src": "KS0NOD",
+        "l3dst": "L3RTT",
+        "ttl": 1,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 236,
+        "payload": "L3RTT: 1019055404         48         48  135513184 KS0NOD LEVEL3_V2.1 TNN179 $M1000 $N\r                                                                                                                                                    ",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193380,
+      "timestamp": "2025-10-18T09:53:51.931Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "5",
+        "srce": "AX25N0",
+        "dest": "POR001-8",
+        "ctrl": 65,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 2,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193379,
+      "timestamp": "2025-10-18T09:53:51.884Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "7",
+        "srce": "DIG233",
+        "dest": "POR001-8",
+        "ctrl": 1,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 0,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193378,
+      "timestamp": "2025-10-18T09:53:51.876Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "9",
+        "srce": "NL5VKL-2",
+        "dest": "POR001-8",
+        "ctrl": 65,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 2,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193377,
+      "timestamp": "2025-10-18T09:53:51.83Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "5",
+        "srce": "POR001-8",
+        "dest": "AX25N0",
+        "ctrl": 162,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 5,
+        "tseq": 1,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 256,
+        "l3type": "NetRom",
+        "l3src": "AX25N0",
+        "l3dst": "L3RTT",
+        "ttl": 1,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 236,
+        "payload": "L3RTT:  257980100         52         52 1477132048 SAWNET LEVEL3_V2.1 TNN179 $M90 $N\r                                                                                                                                                      ",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193376,
+      "timestamp": "2025-10-18T09:53:51.82Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "5",
+        "srce": "AX25N0",
+        "dest": "POR001-8",
+        "ctrl": 40,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 1,
+        "tseq": 4,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 256,
+        "l3type": "NetRom",
+        "l3src": "AX25N0",
+        "l3dst": "L3RTT",
+        "ttl": 2,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 236,
+        "payload": "L3RTT:  257980100         52         52 1477132048 SAWNET LEVEL3_V2.1 TNN179 $M90 $N\r                                                                                                                                                      ",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193375,
+      "timestamp": "2025-10-18T09:53:51.801Z",
+      "report": {
+        "reportFrom": "GB7BDX-5",
+        "port": "2",
+        "srce": "GB7JD-5",
+        "dest": "GB7BDX-5",
+        "ctrl": 193,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 6,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193374,
+      "timestamp": "2025-10-18T09:53:51.73Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "9",
+        "srce": "POR001-8",
+        "dest": "NL5VKL-2",
+        "ctrl": 226,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 7,
+        "tseq": 1,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 256,
+        "l3type": "NetRom",
+        "l3src": "NL5VKL-2",
+        "l3dst": "L3RTT",
+        "ttl": 1,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 236,
+        "payload": "L3RTT: 1676977500         52         52    8007024 UDNTNN LEVEL3_V2.1 TNN179 $N\r                                                                                                                                                           ",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193373,
+      "timestamp": "2025-10-18T09:53:51.724Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "9",
+        "srce": "NL5VKL-2",
+        "dest": "POR001-8",
+        "ctrl": 44,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 1,
+        "tseq": 6,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 256,
+        "l3type": "NetRom",
+        "l3src": "NL5VKL-2",
+        "l3dst": "L3RTT",
+        "ttl": 2,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 236,
+        "payload": "L3RTT: 1676977500         52         52    8007024 UDNTNN LEVEL3_V2.1 TNN179 $N\r                                                                                                                                                           ",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193372,
+      "timestamp": "2025-10-18T09:53:51.671Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "7",
+        "srce": "DIG233",
+        "dest": "POR001-8",
+        "ctrl": 232,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 7,
+        "tseq": 4,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 256,
+        "l3type": "NetRom",
+        "l3src": "DIG233",
+        "l3dst": "L3RTT",
+        "ttl": 2,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 236,
+        "payload": "L3RTT:  436334800         20         20    7713432 CB0DDN LEVEL3_V2.1 TNN179 $M50 $N\r                                                                                                                                                      ",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193371,
+      "timestamp": "2025-10-18T09:53:51.664Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "7",
+        "srce": "POR001-8",
+        "dest": "DIG233",
+        "ctrl": 174,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 5,
+        "tseq": 7,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 256,
+        "l3type": "NetRom",
+        "l3src": "DIG233",
+        "l3dst": "L3RTT",
+        "ttl": 1,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 236,
+        "payload": "L3RTT:  436334800         20         20    7713432 CB0DDN LEVEL3_V2.1 TNN179 $M50 $N\r                                                                                                                                                      ",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193370,
+      "timestamp": "2025-10-18T09:53:51.603Z",
+      "report": {
+        "reportFrom": "GB7BDX-5",
+        "port": "2",
+        "srce": "GB7BDX-5",
+        "dest": "GB7JD-5",
+        "ctrl": 10,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 0,
+        "tseq": 5,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 20,
+        "l3type": "NetRom",
+        "l3src": "GB7BDX-8",
+        "l3dst": "GB7JD-8",
+        "ttl": 25,
+        "l4type": "INFO ACK",
+        "toCct": 355,
+        "rxSeq": 3,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193369,
+      "timestamp": "2025-10-18T09:53:51.595Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 133,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "KO4YAW-7",
+            "alias": "YAWNOD",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "GB7YEW",
+            "alias": "YEWBBS",
+            "via": "GM3YEW-4",
+            "qual": 202
+          },
+          {
+            "call": "SM0YOS",
+            "alias": "YOSNOD",
+            "via": "PD0LPM-9",
+            "qual": 161
+          },
+          {
+            "call": "VE7POO-7",
+            "alias": "YVRPOO",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "WZ0C-7",
+            "alias": "ZOCBBS",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "PI1ZTM",
+            "alias": "ZTMNOD",
+            "via": "VK5LEX-3",
+            "qual": 202
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193368,
+      "timestamp": "2025-10-18T09:53:51.587Z",
+      "report": {
+        "reportFrom": "GB7BDX-5",
+        "port": "2",
+        "srce": "GB7JD-5",
+        "dest": "GB7BDX-5",
+        "ctrl": 174,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 5,
+        "tseq": 7,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 23,
+        "l3type": "NetRom",
+        "l3src": "GB7JD-8",
+        "l3dst": "GB7BDX-8",
+        "ttl": 25,
+        "l4type": "INFO",
+        "toCct": 179,
+        "txSeq": 2,
+        "rxSeq": 3,
+        "payLen": 3,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193367,
+      "timestamp": "2025-10-18T09:53:51.379Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "IR0AAB-2",
+            "alias": "SICDRM",
+            "via": "PD0LPM-9",
+            "qual": 161
+          },
+          {
+            "call": "OK2PEN-5",
+            "alias": "SJCCTY",
+            "via": "OK2PEN-5",
+            "qual": 203
+          },
+          {
+            "call": "KD6OAT-7",
+            "alias": "SLCOAT",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "PI1SNK",
+            "alias": "SNEEK",
+            "via": "PD0LPM-9",
+            "qual": 161
+          },
+          {
+            "call": "VK2IO-1",
+            "alias": "SYDNEY",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "VE3CGR-12",
+            "alias": "TLKCGR",
+            "via": "VE3CGR-7",
+            "qual": 202
+          },
+          {
+            "call": "VK1KW",
+            "alias": "WSTCAN",
+            "via": "VK1KW",
+            "qual": 203
+          },
+          {
+            "call": "DK0WUE-7",
+            "alias": "WUENOD",
+            "via": "DK0WUE-7",
+            "qual": 203
+          },
+          {
+            "call": "DK0WUE-4",
+            "alias": "WUENTS",
+            "via": "DK0WUE-7",
+            "qual": 202
+          },
+          {
+            "call": "DK0WUE-6",
+            "alias": "WUERMS",
+            "via": "DK0WUE-7",
+            "qual": 202
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193366,
+      "timestamp": "2025-10-18T09:53:51.153Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "VE2PKT-8",
+            "alias": "PKTCHT",
+            "via": "VE2PKT-4",
+            "qual": 202
+          },
+          {
+            "call": "VE2PKT-4",
+            "alias": "PKTXRP",
+            "via": "VE2PKT-4",
+            "qual": 203
+          },
+          {
+            "call": "WW6Q-7",
+            "alias": "PLAKE",
+            "via": "WG3K-7",
+            "qual": 161
+          },
+          {
+            "call": "G8BPQ-9",
+            "alias": "POGO4",
+            "via": "EI2GYB-7",
+            "qual": 161
+          },
+          {
+            "call": "GB7RJJ-7",
+            "alias": "RJJNOD",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "WG3K-10",
+            "alias": "RMSCBH",
+            "via": "WG3K-7",
+            "qual": 202
+          },
+          {
+            "call": "IW2OHX-10",
+            "alias": "RMSMI",
+            "via": "IW2OHX-15",
+            "qual": 202
+          },
+          {
+            "call": "PY2ZEN-10",
+            "alias": "RMSZEN",
+            "via": "OK2PEN-5",
+            "qual": 202
+          },
+          {
+            "call": "WQ6N-13",
+            "alias": "SANTEE",
+            "via": "K7EK-6",
+            "qual": 161
+          },
+          {
+            "call": "N6ROE-3",
+            "alias": "SATNOS",
+            "via": "N2NOV-7",
+            "qual": 161
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193365,
+      "timestamp": "2025-10-18T09:53:50.93Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "VK2NA-7",
+            "alias": "NEWNOD",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "FK8ET-7",
+            "alias": "NOD8ET",
+            "via": "FK8ET-7",
+            "qual": 203
+          },
+          {
+            "call": "K2JJI-7",
+            "alias": "NODJJI",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "VE1JOT-7",
+            "alias": "NSJNOS",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "PE1OEZ-10",
+            "alias": "OEZxrt",
+            "via": "PD0LPM-9",
+            "qual": 161
+          },
+          {
+            "call": "VA2OM-8",
+            "alias": "OMCHAT",
+            "via": "VE2PKT-4",
+            "qual": 1
+          },
+          {
+            "call": "NS2B-7",
+            "alias": "PENFLD",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "GM3YEW-7",
+            "alias": "PERCHT",
+            "via": "GM3YEW-4",
+            "qual": 202
+          },
+          {
+            "call": "VE3KPG-2",
+            "alias": "PETERB",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "W0ARP-7",
+            "alias": "PHYLNS",
+            "via": "W0ARP-7",
+            "qual": 203
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193364,
+      "timestamp": "2025-10-18T09:53:50.717Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "VK5LEX-10",
+            "alias": "LEXRMS",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "K1YMI-7",
+            "alias": "LFALLS",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "SV1DZI-9",
+            "alias": "LINBPQ",
+            "via": "SV1DZI-8",
+            "qual": 186
+          },
+          {
+            "call": "PD0LPM",
+            "alias": "LPMBBS",
+            "via": "PD0LPM-9",
+            "qual": 202
+          },
+          {
+            "call": "W4MLB-3",
+            "alias": "MELBRN",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "KA1YZC-3",
+            "alias": "MERID",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "N5MDT-13",
+            "alias": "MONTTX",
+            "via": "EI2GYB-7",
+            "qual": 161
+          },
+          {
+            "call": "N3FUD-7",
+            "alias": "NCPA",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "PI1LAP-7",
+            "alias": "NDRLND",
+            "via": "OK2PEN-5",
+            "qual": 161
+          },
+          {
+            "call": "GM3YEW-4",
+            "alias": "NETHI",
+            "via": "GM3YEW-4",
+            "qual": 203
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193363,
+      "timestamp": "2025-10-18T09:53:50.494Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "G8PZT",
+            "alias": "KIDDER",
+            "via": "G8PZT",
+            "qual": 203
+          },
+          {
+            "call": "UT1HZM-5",
+            "alias": "KRS",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "VK1KW-2",
+            "alias": "KWNODE",
+            "via": "VK1KW",
+            "qual": 174
+          },
+          {
+            "call": "VK1KW-5",
+            "alias": "KWXNOD",
+            "via": "VK1KW",
+            "qual": 174
+          },
+          {
+            "call": "KY2D-15",
+            "alias": "KY2D2M",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "K7EK",
+            "alias": "KYBBS",
+            "via": "K7EK-6",
+            "qual": 190
+          },
+          {
+            "call": "K7EK-11",
+            "alias": "KYCHAT",
+            "via": "K7EK-6",
+            "qual": 189
+          },
+          {
+            "call": "W7JD-1",
+            "alias": "KYDXC",
+            "via": "K7EK-6",
+            "qual": 189
+          },
+          {
+            "call": "K7EK-6",
+            "alias": "KYNOS",
+            "via": "K7EK-6",
+            "qual": 203
+          },
+          {
+            "call": "K7EK-10",
+            "alias": "KYRMS",
+            "via": "K7EK-6",
+            "qual": 190
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193362,
+      "timestamp": "2025-10-18T09:53:50.28Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "NM5PB-5",
+            "alias": "IACCTY",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "N9LYA-5",
+            "alias": "INNOS",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "PD1JBO-9",
+            "alias": "JBONOD",
+            "via": "PD0LPM-9",
+            "qual": 161
+          },
+          {
+            "call": "GB7JD-8",
+            "alias": "JEDCHT",
+            "via": "GB7JD-5",
+            "qual": 161
+          },
+          {
+            "call": "GB7BDX-5",
+            "alias": "JEDL64",
+            "via": "GB7JD-5",
+            "qual": 161
+          },
+          {
+            "call": "GB7JD-5",
+            "alias": "JEDLIN",
+            "via": "GB7JD-5",
+            "qual": 203
+          },
+          {
+            "call": "GB7JED-5",
+            "alias": "JEDNOD",
+            "via": "GB7JD-5",
+            "qual": 161
+          },
+          {
+            "call": "PD1NL",
+            "alias": "JEFNOD",
+            "via": "PD0LPM-9",
+            "qual": 161
+          },
+          {
+            "call": "PD0LPM-9",
+            "alias": "JOURE",
+            "via": "PD0LPM-9",
+            "qual": 203
+          },
+          {
+            "call": "G8PZT-8",
+            "alias": "KDRCHT",
+            "via": "G8PZT",
+            "qual": 202
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193361,
+      "timestamp": "2025-10-18T09:53:50.056Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "WB2CMF-5",
+            "alias": "FARMVL",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "N3HYM-5",
+            "alias": "FDKMD",
+            "via": "EI2GYB-7",
+            "qual": 161
+          },
+          {
+            "call": "KQ6UP-9",
+            "alias": "GTJNOS",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "EI2GYB-3",
+            "alias": "GYBBBS",
+            "via": "EI2GYB-7",
+            "qual": 201
+          },
+          {
+            "call": "EI2GYB-4",
+            "alias": "GYBCHT",
+            "via": "EI2GYB-7",
+            "qual": 201
+          },
+          {
+            "call": "EI2GYB-7",
+            "alias": "GYBNOD",
+            "via": "EI2GYB-7",
+            "qual": 203
+          },
+          {
+            "call": "EI2GYB-5",
+            "alias": "GYBRMS",
+            "via": "EI2GYB-7",
+            "qual": 201
+          },
+          {
+            "call": "EI2GYB-2",
+            "alias": "GYBWAL",
+            "via": "EI2GYB-7",
+            "qual": 201
+          },
+          {
+            "call": "EI2GYB-10",
+            "alias": "GYBWWW",
+            "via": "EI2GYB-7",
+            "qual": 201
+          },
+          {
+            "call": "VK6HGR-15",
+            "alias": "HGRBBS",
+            "via": "ZL2AQY-2",
+            "qual": 198
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193360,
+      "timestamp": "2025-10-18T09:53:49.834Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "N2KGC-3",
+            "alias": "COOPTN",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "OK0NMG-5",
+            "alias": "CZGATE",
+            "via": "OK2PEN-5",
+            "qual": 161
+          },
+          {
+            "call": "K5DAT-5",
+            "alias": "DATXR",
+            "via": "K5DAT-5",
+            "qual": 203
+          },
+          {
+            "call": "G7VJA-8",
+            "alias": "DEVCHT",
+            "via": "K5DAT-5",
+            "qual": 1
+          },
+          {
+            "call": "DM4RW-7",
+            "alias": "DM4NOD",
+            "via": "EI2GYB-7",
+            "qual": 161
+          },
+          {
+            "call": "IW2OHX-6",
+            "alias": "DXCMI",
+            "via": "IW2OHX-15",
+            "qual": 202
+          },
+          {
+            "call": "PY2ZEN-7",
+            "alias": "DXCZEN",
+            "via": "OK2PEN-5",
+            "qual": 202
+          },
+          {
+            "call": "W7JD-7",
+            "alias": "DXLINK",
+            "via": "K7EK-6",
+            "qual": 190
+          },
+          {
+            "call": "SV1DZI-8",
+            "alias": "DZIBPQ",
+            "via": "SV1DZI-8",
+            "qual": 203
+          },
+          {
+            "call": "SV1DZI-14",
+            "alias": "DZIJNS",
+            "via": "N2NOV-7",
+            "qual": 161
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193359,
+      "timestamp": "2025-10-18T09:53:49.612Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "KE2PW-5",
+            "alias": "BRODNY",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "VK1KW-6",
+            "alias": "CANBBS",
+            "via": "VK1KW",
+            "qual": 202
+          },
+          {
+            "call": "EI0CAR-7",
+            "alias": "CARNOD",
+            "via": "EI2GYB-7",
+            "qual": 161
+          },
+          {
+            "call": "VA7RBP-7",
+            "alias": "CASLGR",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "WG3K-7",
+            "alias": "CBEACH",
+            "via": "WG3K-7",
+            "qual": 203
+          },
+          {
+            "call": "VE3CGR-11",
+            "alias": "CGRCHT",
+            "via": "VE3CGR-7",
+            "qual": 202
+          },
+          {
+            "call": "FK8ET-2",
+            "alias": "CHT8ET",
+            "via": "FK8ET-7",
+            "qual": 202
+          },
+          {
+            "call": "WG3K-8",
+            "alias": "CHTCBH",
+            "via": "WG3K-7",
+            "qual": 202
+          },
+          {
+            "call": "IW2OHX-5",
+            "alias": "CHTMI",
+            "via": "IW2OHX-15",
+            "qual": 202
+          },
+          {
+            "call": "IW2OHX-9",
+            "alias": "CNVMI",
+            "via": "IW2OHX-15",
+            "qual": 202
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193358,
+      "timestamp": "2025-10-18T09:53:49.397Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "GB7BED-1",
+            "alias": "BEDCHT",
+            "via": "GB7BED-5",
+            "qual": 202
+          },
+          {
+            "call": "GB7BED-5",
+            "alias": "BEDFRD",
+            "via": "GB7BED-5",
+            "qual": 203
+          },
+          {
+            "call": "GB7BEX-7",
+            "alias": "BEX",
+            "via": "EI2GYB-7",
+            "qual": 161
+          },
+          {
+            "call": "PY2BIL-1",
+            "alias": "BILBBS",
+            "via": "PY2BIL-4",
+            "qual": 202
+          },
+          {
+            "call": "PY2BIL-2",
+            "alias": "BILCHT",
+            "via": "PY2BIL-4",
+            "qual": 202
+          },
+          {
+            "call": "PY2BIL-4",
+            "alias": "BILNOD",
+            "via": "PY2BIL-4",
+            "qual": 203
+          },
+          {
+            "call": "PY2BIL-10",
+            "alias": "BILRMS",
+            "via": "PY2BIL-4",
+            "qual": 202
+          },
+          {
+            "call": "IW2OHX-15",
+            "alias": "BOLHF",
+            "via": "IW2OHX-15",
+            "qual": 203
+          },
+          {
+            "call": "VE3CGR-7",
+            "alias": "BPQCGR",
+            "via": "VE3CGR-7",
+            "qual": 203
+          },
+          {
+            "call": "KA1YZC-2",
+            "alias": "BPQYZC",
+            "via": "N2NOV-7",
+            "qual": 161
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193357,
+      "timestamp": "2025-10-18T09:53:49.169Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "N9SEO-12",
+            "alias": "BAXXCT",
+            "via": "N9SEO-11",
+            "qual": 1
+          },
+          {
+            "call": "N9SEO-11",
+            "alias": "BAXXRP",
+            "via": "N9SEO-11",
+            "qual": 203
+          },
+          {
+            "call": "FK8ET-1",
+            "alias": "BBS8ET",
+            "via": "FK8ET-7",
+            "qual": 202
+          },
+          {
+            "call": "WG3K-4",
+            "alias": "BBSCBH",
+            "via": "WG3K-7",
+            "qual": 202
+          },
+          {
+            "call": "VE3CGR-1",
+            "alias": "BBSCGR",
+            "via": "VE3CGR-7",
+            "qual": 202
+          },
+          {
+            "call": "IW2OHX-8",
+            "alias": "BBSMI",
+            "via": "IW2OHX-15",
+            "qual": 202
+          },
+          {
+            "call": "OK0NBR-8",
+            "alias": "BBSNBR",
+            "via": "OK2PEN-5",
+            "qual": 202
+          },
+          {
+            "call": "OK2PEN-1",
+            "alias": "BBSPEN",
+            "via": "OK2PEN-5",
+            "qual": 202
+          },
+          {
+            "call": "KC1UIX-3",
+            "alias": "BBSUIX",
+            "via": "N2NOV-7",
+            "qual": 161
+          },
+          {
+            "call": "GB7BED",
+            "alias": "BEDBBS",
+            "via": "GB7BED-5",
+            "qual": 202
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193356,
+      "timestamp": "2025-10-18T09:53:48.956Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "W0ARP-1",
+            "alias": "ARPBBS",
+            "via": "W0ARP-7",
+            "qual": 202
+          },
+          {
+            "call": "W0ARP-10",
+            "alias": "ARPRMS",
+            "via": "W0ARP-7",
+            "qual": 202
+          },
+          {
+            "call": "VK3AT-3",
+            "alias": "ATBBS",
+            "via": "VK3AT-1",
+            "qual": 202
+          },
+          {
+            "call": "VK3AT-11",
+            "alias": "ATCHT",
+            "via": "VK3AT-1",
+            "qual": 202
+          },
+          {
+            "call": "VK3AT-1",
+            "alias": "AUSMEL",
+            "via": "VK3AT-1",
+            "qual": 203
+          },
+          {
+            "call": "ZL2BAU",
+            "alias": "BAUBBS",
+            "via": "ZL2BAU",
+            "qual": 255
+          },
+          {
+            "call": "ZL2BAU-8",
+            "alias": "BAUCHT",
+            "via": "ZL2BAU-8",
+            "qual": 255
+          },
+          {
+            "call": "ZL2BAU-2",
+            "alias": "BAUPMS",
+            "via": "ZL2BAU-2",
+            "qual": 255
+          },
+          {
+            "call": "N9SEO-2",
+            "alias": "BAXDX",
+            "via": "N9SEO-11",
+            "qual": 180
+          },
+          {
+            "call": "N9SEO-7",
+            "alias": "BAXURO",
+            "via": "N9SEO-11",
+            "qual": 181
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193355,
+      "timestamp": "2025-10-18T09:53:48.918Z",
+      "report": {
+        "reportFrom": "G8BPQ-9",
+        "port": "2",
+        "srce": "GM8BPQ-2",
+        "dest": "GM8BPQ-9",
+        "ctrl": 145,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 4,
+        "tseq": 0,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193354,
+      "timestamp": "2025-10-18T09:53:48.868Z",
+      "report": {
+        "reportFrom": "GB7NOT-2",
+        "port": "3",
+        "srce": "GM8BPQ-2",
+        "dest": "GM8BPQ-9",
+        "ctrl": 145,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 4,
+        "tseq": 0,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193353,
+      "timestamp": "2025-10-18T09:53:48.849Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "21",
+        "srce": "VK1KW",
+        "dest": "ZL2BAU-3",
+        "ctrl": 49,
+        "l2type": "RR",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 1,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193352,
+      "timestamp": "2025-10-18T09:53:48.841Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "21",
+        "srce": "ZL2BAU-3",
+        "dest": "VK1KW",
+        "ctrl": 17,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 0,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193351,
+      "timestamp": "2025-10-18T09:53:48.833Z",
+      "report": {
+        "reportFrom": "GB7BPQ-7",
+        "port": "3",
+        "srce": "GM8BPQ-2",
+        "dest": "GM8BPQ-9",
+        "ctrl": 145,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 4,
+        "tseq": 0,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193350,
+      "timestamp": "2025-10-18T09:53:48.791Z",
+      "report": {
+        "reportFrom": "GB7NOT-2",
+        "port": "3",
+        "srce": "GM8BPQ-9",
+        "dest": "GM8BPQ-2",
+        "ctrl": 49,
+        "l2type": "RR",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 1,
+        "tseq": 0,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193349,
+      "timestamp": "2025-10-18T09:53:48.782Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "AE5E",
+            "alias": "5EDXC",
+            "via": "AE5E-14",
+            "qual": 202
+          },
+          {
+            "call": "AE5E-14",
+            "alias": "5ENODE",
+            "via": "AE5E-14",
+            "qual": 203
+          },
+          {
+            "call": "VK5LEX-3",
+            "alias": "ADLN3",
+            "via": "VK5LEX-3",
+            "qual": 203
+          },
+          {
+            "call": "VK5LEX-5",
+            "alias": "ADLNBB",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "VK5LEX-4",
+            "alias": "ADLNCH",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "ZL2AQY-8",
+            "alias": "AQYCHT",
+            "via": "ZL2AQY-2",
+            "qual": 202
+          },
+          {
+            "call": "ZL2AQY-2",
+            "alias": "AQYNOD",
+            "via": "ZL2AQY-2",
+            "qual": 203
+          },
+          {
+            "call": "ZL2AQY-3",
+            "alias": "AQYPMS",
+            "via": "ZL2AQY-2",
+            "qual": 202
+          },
+          {
+            "call": "N2NOV-7",
+            "alias": "ARECS",
+            "via": "N2NOV-7",
+            "qual": 203
+          },
+          {
+            "call": "N9SEO-3",
+            "alias": "ARMNTH",
+            "via": "N9SEO-11",
+            "qual": 161
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193348,
+      "timestamp": "2025-10-18T09:53:48.774Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "4",
+        "srce": "LK0NOD",
+        "dest": "POR001-8",
+        "ctrl": 22,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 0,
+        "tseq": 3,
+        "pf": "P",
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 20,
+        "l3type": "NetRom",
+        "l3src": "LK0NOD",
+        "l3dst": "KEEPLI",
+        "ttl": 1,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 0,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193347,
+      "timestamp": "2025-10-18T09:53:48.762Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "4",
+        "srce": "POR001-8",
+        "dest": "LK0NOD",
+        "ctrl": 145,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 4,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193346,
+      "timestamp": "2025-10-18T09:53:48.75Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "29",
+        "srce": "POR001-7",
+        "dest": "POR001-8",
+        "ctrl": 81,
+        "l2type": "RR",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 2,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193345,
+      "timestamp": "2025-10-18T09:53:48.742Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "29",
+        "srce": "POR001-8",
+        "dest": "POR001-7",
+        "ctrl": 49,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 1,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193344,
+      "timestamp": "2025-10-18T09:53:48.729Z",
+      "report": {
+        "reportFrom": "GB7BPQ-7",
+        "port": "3",
+        "srce": "GM8BPQ-9",
+        "dest": "GM8BPQ-2",
+        "ctrl": 49,
+        "l2type": "RR",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 1,
+        "tseq": 0,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193343,
+      "timestamp": "2025-10-18T09:53:48.717Z",
+      "report": {
+        "reportFrom": "G8BPQ-9",
+        "port": "2",
+        "srce": "GM8BPQ-9",
+        "dest": "GM8BPQ-2",
+        "ctrl": 49,
+        "l2type": "RR",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 1,
+        "tseq": 0,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193342,
+      "timestamp": "2025-10-18T09:53:48.541Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "4",
+        "srce": "LK0NOD",
+        "dest": "PORNOD",
+        "ctrl": 126,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 3,
+        "tseq": 7,
+        "pf": "P",
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 20,
+        "l3type": "NetRom",
+        "l3src": "LK0NOD",
+        "l3dst": "KEEPLI",
+        "ttl": 1,
+        "l4type": "INFO",
+        "toCct": 0,
+        "txSeq": 0,
+        "rxSeq": 0,
+        "payLen": 0,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193341,
+      "timestamp": "2025-10-18T09:53:48.534Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "4",
+        "srce": "PORNOD",
+        "dest": "LK0NOD",
+        "ctrl": 17,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 0,
+        "pf": "F",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193340,
+      "timestamp": "2025-10-18T09:53:48.525Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "41",
+        "srce": "ZL2BAU-3",
+        "dest": "NODES",
+        "ctrl": 3,
+        "l2type": "UI",
+        "cr": "C",
+        "modulo": 8,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 217,
+        "l3type": "Routing info",
+        "type": "NODES",
+        "fromAlias": "BAUNOD",
+        "nodes": [
+          {
+            "call": "K8OPG-15",
+            "alias": "#USEST",
+            "via": "WG3K-7",
+            "qual": 161
+          },
+          {
+            "call": "WA3WLH-15",
+            "alias": "#USWST",
+            "via": "WG3K-7",
+            "qual": 161
+          },
+          {
+            "call": "VK2RZ-1",
+            "alias": "2RZBBS",
+            "via": "VK5LEX-3",
+            "qual": 202
+          },
+          {
+            "call": "VK2RZ-7",
+            "alias": "2RZBPQ",
+            "via": "VK2RZ-7",
+            "qual": 203
+          },
+          {
+            "call": "VK2RZ-4",
+            "alias": "2RZCHT",
+            "via": "VK2RZ-7",
+            "qual": 202
+          },
+          {
+            "call": "VK2RZ",
+            "alias": "2RZCON",
+            "via": "VK2RZ-7",
+            "qual": 202
+          },
+          {
+            "call": "VK2RZ-10",
+            "alias": "2RZRMS",
+            "via": "VK2RZ-7",
+            "qual": 202
+          },
+          {
+            "call": "AE5E-3",
+            "alias": "5EBBS",
+            "via": "AE5E-14",
+            "qual": 202
+          },
+          {
+            "call": "AE5E-2",
+            "alias": "5ECHAT",
+            "via": "AE5E-14",
+            "qual": 202
+          },
+          {
+            "call": "AE5E-4",
+            "alias": "5EDXA",
+            "via": "AE5E-14",
+            "qual": 202
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193339,
+      "timestamp": "2025-10-18T09:53:48.116Z",
+      "report": {
+        "reportFrom": "G8BPQ-9",
+        "port": "4",
+        "srce": "GB7BEX-15",
+        "dest": "GB7RDG-2",
+        "ctrl": 191,
+        "l2type": "XID",
+        "cr": "C",
+        "modulo": 8,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193338,
+      "timestamp": "2025-10-18T09:53:48.091Z",
+      "report": {
+        "reportFrom": "POR001-8",
+        "port": "10",
+        "srce": "AT2SN",
+        "dest": "POR001-8",
+        "ctrl": 161,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 5,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193337,
+      "timestamp": "2025-10-18T09:53:48.065Z",
+      "report": {
+        "reportFrom": "GB7NOT-2",
+        "port": "4",
+        "srce": "GB7BEX-15",
+        "dest": "GB7RDG-2",
+        "ctrl": 191,
+        "l2type": "XID",
+        "cr": "C",
+        "modulo": 8,
+        "pf": "P",
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193336,
+      "timestamp": "2025-10-18T09:53:47.853Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "40",
+        "srce": "ZL2BAU-3",
+        "dest": "K5DAT-5",
+        "ctrl": 193,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 6,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193335,
+      "timestamp": "2025-10-18T09:53:47.683Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "5",
+        "srce": "G7VJA-5",
+        "dest": "K5DAT-5",
+        "ctrl": 193,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 6,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193334,
+      "timestamp": "2025-10-18T09:53:47.663Z",
+      "report": {
+        "reportFrom": "ZL2BAU-3",
+        "port": "40",
+        "srce": "K5DAT-5",
+        "dest": "ZL2BAU-3",
+        "ctrl": 106,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 3,
+        "tseq": 5,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 192,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "VE2PKT-4",
+            "alias": "PKTXRP",
+            "hops": 3,
+            "tt": 11,
+            "ipAddr": "44.135.49.4",
+            "bitMask": 32,
+            "tcpPort": 2323,
+            "latitude": 46.2596,
+            "longitude": -72.3766,
+            "software": "XRLin",
+            "isNode": true,
+            "isPMS": true,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T22:50:18+00:00"
+          },
+          {
+            "call": "GB7CQV-7",
+            "alias": "PTRNOD",
+            "hops": 3,
+            "tt": 32
+          },
+          {
+            "call": "WQ6N-8",
+            "alias": "SANCHT",
+            "hops": 2,
+            "tt": 4,
+            "ipAddr": "44.63.18.171",
+            "bitMask": 32,
+            "tcpPort": 3600,
+            "latitude": 32.5125,
+            "longitude": -117.025,
+            "software": "XRPi",
+            "isNode": false,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T22:50:43+00:00"
+          },
+          {
+            "call": "WQ6N-13",
+            "alias": "SANTEE",
+            "hops": 3,
+            "tt": 54
+          },
+          {
+            "call": "WQ6N-4",
+            "alias": "SANXRO",
+            "hops": 2,
+            "tt": 4,
+            "ipAddr": "44.63.18.171",
+            "bitMask": 32,
+            "tcpPort": 23,
+            "latitude": 32.5125,
+            "longitude": -117.025,
+            "software": "XRPi",
+            "isNode": true,
+            "isPMS": true,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T22:50:43+00:00"
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193333,
+      "timestamp": "2025-10-18T09:53:47.467Z",
+      "report": {
+        "reportFrom": "G7VJA-5",
+        "port": "5",
+        "srce": "K5DAT-5",
+        "dest": "G7VJA-5",
+        "ctrl": 138,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 4,
+        "tseq": 5,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 192,
+        "l3type": "Routing info",
+        "type": "INP3",
+        "nodes": [
+          {
+            "call": "VE2PKT-4",
+            "alias": "PKTXRP",
+            "hops": 3,
+            "tt": 11,
+            "ipAddr": "44.135.49.4",
+            "bitMask": 32,
+            "tcpPort": 2323,
+            "latitude": 46.2596,
+            "longitude": -72.3766,
+            "software": "XRLin",
+            "isNode": true,
+            "isPMS": true,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T10:50:18+00:00"
+          },
+          {
+            "call": "GB7CQV-7",
+            "alias": "PTRNOD",
+            "hops": 3,
+            "tt": 32
+          },
+          {
+            "call": "WQ6N-8",
+            "alias": "SANCHT",
+            "hops": 2,
+            "tt": 4,
+            "ipAddr": "44.63.18.171",
+            "bitMask": 32,
+            "tcpPort": 3600,
+            "latitude": 32.5125,
+            "longitude": -117.025,
+            "software": "XRPi",
+            "isNode": false,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T10:50:43+00:00"
+          },
+          {
+            "call": "WQ6N-13",
+            "alias": "SANTEE",
+            "hops": 3,
+            "tt": 54
+          },
+          {
+            "call": "WQ6N-4",
+            "alias": "SANXRO",
+            "hops": 2,
+            "tt": 4,
+            "ipAddr": "44.63.18.171",
+            "bitMask": 32,
+            "tcpPort": 23,
+            "latitude": 32.5125,
+            "longitude": -117.025,
+            "software": "XRPi",
+            "isNode": true,
+            "isPMS": true,
+            "isXRCHAT": true,
+            "isRTCHAT": true,
+            "timestamp": "2025-10-18T10:50:43+00:00"
+          }
+        ],
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193332,
+      "timestamp": "2025-10-18T09:53:47.417Z",
+      "report": {
+        "reportFrom": "DNX284",
+        "port": "3",
+        "srce": "CB0SAW",
+        "dest": "DNX284",
+        "ctrl": 129,
+        "l2type": "RR",
+        "cr": "R",
+        "modulo": 8,
+        "rseq": 4,
+        "@type": "L2Trace"
+      }
+    },
+    {
+      "id": 2193331,
+      "timestamp": "2025-10-18T09:53:47.361Z",
+      "report": {
+        "reportFrom": "DNX284",
+        "port": "3",
+        "srce": "DNX284",
+        "dest": "CB0SAW",
+        "ctrl": 230,
+        "l2type": "I",
+        "cr": "C",
+        "modulo": 8,
+        "rseq": 7,
+        "tseq": 3,
+        "pid": 207,
+        "ptcl": "NET/ROM",
+        "ilen": 29,
+        "l3type": "NetRom",
+        "l3src": "DNX284",
+        "l3dst": "BLM274",
+        "ttl": 3,
+        "l4type": "PROT EXT",
+        "payLen": 9,
+        "@type": "L2Trace"
+      }
+    }
+  ],
+  "page": {
+    "limit": 100,
+    "next": "MjAyNS0xMC0xOFQwOTo1Mzo0Ny4zNjEwMDAwWnwyMTkzMzMx"
+  }
+}
