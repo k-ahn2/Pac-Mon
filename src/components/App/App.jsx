@@ -19,13 +19,16 @@ import appIcon from '../../images/appIcon1.png'
 import Badge from 'react-bootstrap/Badge';
 import { Form, Modal } from 'react-bootstrap';
 import JSONPretty from 'react-json-pretty';
+import * as env from '../../env/env'
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 function App() {
   
   const { 
       getTraces,
       traces,
-      recordCount
+      recordCount,
+      donwloadedRecordCount
   } = useContext(ApiContext);
 
   const [showJsonModal, setShowJsonModal] = useState(null)
@@ -86,7 +89,7 @@ function App() {
       queryParams.append("reportFrom", rf)
     })
 
-    queryParams.append("limit", 100)
+    queryParams.append("limit", env.API_PAGE_SIZE)
     queryParams.append("from", traceStart.format('YYYY-MM-DD[T]HH:mm:[00Z]'))
     queryParams.append("to", traceEnd.format('YYYY-MM-DD[T]HH:mm:[00Z]'))
     queryParams.append("includeCount", true)
@@ -154,10 +157,11 @@ function App() {
         </Row>
         <Row>
           <Col>
-            <Badge style={{ padding: '0.5em 0em', width: '100%', marginTop: '0.5rem'}} bg="success">{recordCount && `${recordCount.toLocaleString()} Records Returned`}</Badge>
+            <Badge style={{ padding: '0.5em 0em', width: '100%', marginTop: '0.5rem'}} bg={donwloadedRecordCount < recordCount ? "danger" : "success"}>{recordCount && `${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Records Returned`}</Badge>
+            {/* <ProgressBar variant="success" now={Math.round(Number(donwloadedRecordCount/recordCount)*100)} label={`${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Records Returned`} />; */}
           </Col>
         </Row>
-        <hr style={{ marginTop: '0.5rem' }}/>
+        <hr style={{ margin: '0.5rem 0rem' }}/>
         { traces.length > 0 && <>
             <Row>
                 <Col>
@@ -167,10 +171,22 @@ function App() {
                       label="Suppress NET/ROM"
                       onChange={(e) => setSuppressNetRom(e.target.checked)}
                     />
+                    &nbsp;&nbsp;
+                    <Form.Check
+                      type="switch"
+                      label="Suppress INP3"
+                      // onChange={(e) => setSuppressNetRom(e.target.checked)}
+                    />
+                    &nbsp;&nbsp;
+                    <Form.Check
+                      type="switch"
+                      label="Suppress L2"
+                      // onChange={(e) => setSuppressNetRom(e.target.checked)}
+                    />
                   </div>            
                 </Col>
             </Row>
-            <hr style={{ marginTop: '0.5rem' }}/>
+            <hr style={{ margin: '0.5rem 0rem' }}/>
           </>
         }
         {
