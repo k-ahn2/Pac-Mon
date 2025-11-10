@@ -52,7 +52,10 @@ export const Trace = (props) => {
 
         if (trace.l3dst == 'L3RTT') tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>INP3 RTT</Tag>)
 
-        if (trace.type == 'NODES') tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>NODES</Tag>)   
+        if (trace.type == 'NODES') tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>NODES</Tag>)
+
+        if (props.showPayLen && trace.payLen) tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>Len={trace.payLen}</Tag>)
+
 
         return tags
     }

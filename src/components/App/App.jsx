@@ -44,6 +44,7 @@ function App() {
   const [suppressUI, setSuppressUI] = useState(false)
   const [suppressNodes, setSuppressNodes] = useState(true)
   const [showSequenceCounters, setShowSequenceCounters] = useState(false)
+  const [showPayLen, setShowPayLen] = useState(false)
 
   useEffect(() => {
     console.log(traceReportFrom)
@@ -174,6 +175,13 @@ function App() {
                 <Col>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Form.Check
+                      defaultChecked={true}
+                      type="switch"
+                      label="Suppress NODES"
+                      onChange={(e) => setSuppressNodes(e.target.checked)}
+                    />
+                    &nbsp;&nbsp;
+                    <Form.Check
                       type="switch"
                       label="Suppress NET/ROM"
                       onChange={(e) => setSuppressNetRom(e.target.checked)}
@@ -186,16 +194,15 @@ function App() {
                     />
                     &nbsp;&nbsp;
                     <Form.Check
-                      defaultChecked={true}
                       type="switch"
-                      label="Suppress NODES"
-                      onChange={(e) => setSuppressNodes(e.target.checked)}
+                      label="Show Sequence Counters"
+                      onChange={(e) => setShowSequenceCounters(e.target.checked)}
                     />
                     &nbsp;&nbsp;
                     <Form.Check
                       type="switch"
-                      label="Show Sequence Counters"
-                      onChange={(e) => setShowSequenceCounters(e.target.checked)}
+                      label="Show Payload Length"
+                      onChange={(e) => setShowPayLen(e.target.checked)}
                     />
                     <div style={{ marginLeft: 'auto' }}>Local Count: {filteredTraces.length}</div>
                   </div>
@@ -209,7 +216,7 @@ function App() {
             {
               filteredTraces && filteredTraces.map(t => {
                 return <div className="traceContainer" onClick={() => setShowJsonModal(t)}>
-                    <Trace trace={t} showSequenceCounters={showSequenceCounters}/>
+                    <Trace trace={t} showSequenceCounters={showSequenceCounters} showPayLen={showPayLen}/>
                   </div>
               })
             }
