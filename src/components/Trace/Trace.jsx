@@ -54,7 +54,8 @@ export const Trace = (props) => {
 
         if (trace.type == 'NODES') tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>NODES</Tag>)
 
-        if (props.showPayLen && trace.payLen) tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>Len={trace.payLen}</Tag>)
+        if (props.showPayLen && trace.payLen) tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>plen={trace.payLen}</Tag>)
+        if (props.showPayLen && trace.ilen) tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>ilen={trace.ilen}</Tag>)
 
 
         return tags

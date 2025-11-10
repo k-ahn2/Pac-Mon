@@ -36,12 +36,13 @@ function App() {
   const [traceStart, setTraceStart] = useState(moment().subtract(1,'hour'));
   const [traceEnd, setTraceEnd] = useState(moment().subtract(50,'minutes'));
   const [filteredTraces, setFilteredTraces] = useState([]);
+  const [seeCallsigns, setSeenCallsigns] = useState([]);
 
   // Local Filter States
   const [suppressNetRom, setSuppressNetRom] = useState(false)
   const [suppressInp3, setSuppressInp3] = useState(false)
   const [suppressL2, setSuppressL2] = useState(false)
-  const [suppressUI, setSuppressUI] = useState(false)
+  const [suppressUI, setSuppressUI] = useState(true)
   const [suppressNodes, setSuppressNodes] = useState(true)
   const [showSequenceCounters, setShowSequenceCounters] = useState(false)
   const [showPayLen, setShowPayLen] = useState(false)
@@ -55,16 +56,49 @@ function App() {
   }, [traces, suppressNetRom, suppressInp3, suppressL2, suppressUI, suppressNodes]);
 
   const filterTraces = () => {
-      const localFilteredTraces = traces.filter(t => {
-        if (suppressNetRom && t.report.ptcl == 'NET/ROM') return false
-        if (suppressInp3 && t.report.l3type == 'INP3') return false
-        if (suppressNodes && t.report.type == 'NODES') return false
-        if (suppressUI && t.report.l2Type == 'UI') return false
+      
+    const localSeenCallsigns = []
 
-        return true
-      })
+    const localFilteredTraces = traces.filter(t => {
+      if (suppressNetRom && t.report.ptcl == 'NET/ROM') return false
+      if (suppressInp3 && t.report.l3type == 'INP3') return false
+      if (suppressNodes && t.report.type == 'NODES') return false
+      if (suppressUI && t.report.l2Type == 'UI') return false
 
-      setFilteredTraces(localFilteredTraces)
+      const tmpArray = ['MB7NPW', 'G4WQG']
+      
+      if (t.report.ptcl && t.report.ptcl == 'NET/ROM') {
+        //if ((t.report.l3src != tmpArray[0] || t.report.l3dst != tmpArray[1]) && (t.report.l3src != tmpArray[1] || t.report.l3dst != tmpArray[0])) return false
+      }
+
+      //if ((t.report.srce != tmpArray[0] || t.report.dest != tmpArray[1]) && (t.report.srce != tmpArray[1] || t.report.dest != tmpArray[0])) return false
+
+      return true
+    })
+
+    localFilteredTraces.map(t => {
+
+      const traceObject = []
+
+      if (t.report.ptcl && t.report.ptcl == 'NET/ROM') {
+        traceObject.push(t.report.l3src)
+        traceObject.push(t.report.l3dst)
+      } else {
+        traceObject.push(t.report.srce)
+        traceObject.push(t.report.dest)
+      }
+
+      traceObject.sort()
+
+      if (localSeenCallsigns.filter(t => JSON.stringify(t) === JSON.stringify(traceObject)).length == 0) {
+        localSeenCallsigns.push(traceObject)
+      }
+
+    })
+
+    console.log(localSeenCallsigns)
+
+    setFilteredTraces(localFilteredTraces)
     
   }
 
@@ -175,10 +209,17 @@ function App() {
                 <Col>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Form.Check
-                      defaultChecked={true}
+                      defaultChecked={suppressNodes}
                       type="switch"
                       label="Suppress NODES"
                       onChange={(e) => setSuppressNodes(e.target.checked)}
+                    />
+                    &nbsp;&nbsp;
+                    <Form.Check
+                      defaultChecked={suppressUI}
+                      type="switch"
+                      label="Suppress UI"
+                      onChange={(e) => setSuppressUI(e.target.checked)}
                     />
                     &nbsp;&nbsp;
                     <Form.Check
@@ -195,7 +236,7 @@ function App() {
                     &nbsp;&nbsp;
                     <Form.Check
                       type="switch"
-                      label="Show Sequence Counters"
+                      label="Show L2 Sequence Counters"
                       onChange={(e) => setShowSequenceCounters(e.target.checked)}
                     />
                     &nbsp;&nbsp;
