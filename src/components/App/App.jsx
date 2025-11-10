@@ -32,14 +32,18 @@ function App() {
   } = useContext(ApiContext);
 
   const [showJsonModal, setShowJsonModal] = useState(null)
-
   const [traceReportFrom, setTraceReportFrom] = useState('MB7NPW,GB7NBH');
   const [traceStart, setTraceStart] = useState(moment().subtract(1,'hour'));
   const [traceEnd, setTraceEnd] = useState(moment().subtract(50,'minutes'));
-
   const [filteredTraces, setFilteredTraces] = useState([]);
 
+  // Local Filter States
   const [suppressNetRom, setSuppressNetRom] = useState(false)
+  const [suppressInp3, setSuppressInp3] = useState(false)
+  const [suppressL2, setSuppressL2] = useState(false)
+  const [suppressUI, setSuppressUI] = useState(false)
+  const [suppressNodes, setSuppressNodes] = useState(true)
+  const [showSequenceCounters, setShowSequenceCounters] = useState(false)
 
   useEffect(() => {
     console.log(traceReportFrom)
@@ -47,11 +51,14 @@ function App() {
 
   useEffect(() => {
     filterTraces()
-  }, [traces, suppressNetRom]);
+  }, [traces, suppressNetRom, suppressInp3, suppressL2, suppressUI, suppressNodes]);
 
   const filterTraces = () => {
       const localFilteredTraces = traces.filter(t => {
         if (suppressNetRom && t.report.ptcl == 'NET/ROM') return false
+        if (suppressInp3 && t.report.l3type == 'INP3') return false
+        if (suppressNodes && t.report.type == 'NODES') return false
+        if (suppressUI && t.report.l2Type == 'UI') return false
 
         return true
       })
@@ -175,26 +182,38 @@ function App() {
                     <Form.Check
                       type="switch"
                       label="Suppress INP3"
-                      // onChange={(e) => setSuppressNetRom(e.target.checked)}
+                      onChange={(e) => setSuppressInp3(e.target.checked)}
+                    />
+                    &nbsp;&nbsp;
+                    <Form.Check
+                      defaultChecked={true}
+                      type="switch"
+                      label="Suppress NODES"
+                      onChange={(e) => setSuppressNodes(e.target.checked)}
                     />
                     &nbsp;&nbsp;
                     <Form.Check
                       type="switch"
-                      label="Suppress L2"
-                      // onChange={(e) => setSuppressNetRom(e.target.checked)}
+                      label="Show Sequence Counters"
+                      onChange={(e) => setShowSequenceCounters(e.target.checked)}
                     />
-                  </div>            
+                    <div style={{ marginLeft: 'auto' }}>Local Count: {filteredTraces.length}</div>
+                  </div>
                 </Col>
             </Row>
             <hr style={{ margin: '0.5rem 0rem' }}/>
           </>
         }
         {
-          filteredTraces && filteredTraces.map(t => {
-            return <div className="traceContainer" onClick={() => setShowJsonModal(t)}>
-                <Trace trace={t} />
-              </div>
-          })
+          <Row>
+            {
+              filteredTraces && filteredTraces.map(t => {
+                return <div className="traceContainer" onClick={() => setShowJsonModal(t)}>
+                    <Trace trace={t} showSequenceCounters={showSequenceCounters}/>
+                  </div>
+              })
+            }
+          </Row>
         }
       </Container>
     </ThemeProvider>

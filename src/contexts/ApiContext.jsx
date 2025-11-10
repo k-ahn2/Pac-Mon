@@ -45,12 +45,8 @@ export const ApiProvider = ({ children }) => {
 
   const getTraces = async (queryParams) => {
 
-    const tempTraces = []
-
     const api = new URL(env.TRACES_API_URL)
     api.search = queryParams
-
-    console.log(api)
 
     const options = {
       method: "GET",
@@ -63,19 +59,18 @@ export const ApiProvider = ({ children }) => {
     const fetchTraces = (cursor = null) => {
       
       if (!cursor) {
-     
+        // First fetch - update state to display the data received
+
         fetch(api, options)
         .then((response) => response.json())
         .then((data) => {
-          counter.current = 1 
+          counter.current = 1 // Reset the counter
           tracePages.current = [...data.data]
-          // First fetch - update state to display the data received
           localRecordCount.current = data.page.totalCount
           setRecordCount(data.page.totalCount)
           setTraces(tracePages.current)
           data.page.totalCount > env.API_PAGE_SIZE ? setDownloadedRecordCount(counter.current * env.API_PAGE_SIZE) : setDownloadedRecordCount(data.page.totalCount)
-          // If there is a cursor, loop
-          if (data.page.next) fetchTraces(data.page.next)
+          if (data.page.next) fetchTraces(data.page.next) // If there is a cursor, loop
         });
 
       } else {
