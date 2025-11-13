@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
-import localApiSource from '../source/localApiSource.json'
+import React, { useState, useRef } from 'react'
 import * as env from '../env/env.js'
+//import localApiSource from '../source/localApiSource.json'
 
 export const ApiContext = React.createContext({
   getTraces: () => {},
@@ -17,13 +17,6 @@ export const ApiProvider = ({ children }) => {
   const [donwloadedRecordCount, setDownloadedRecordCount] = useState(0)
   const counter = useRef(0)
   const localRecordCount = useRef(0)
-
-  useEffect(() => {
-    //setApiReponse(localApiSource)
-    //getNodes()
-    // queryApi()
-    console.log((200/2000)*100)
-  },[])
 
   const getNodes = async () => {
     const api = new URL(env.NODES_API_URL)
@@ -59,11 +52,10 @@ export const ApiProvider = ({ children }) => {
     const fetchTraces = (cursor = null) => {
       
       if (!cursor) {
-        // First fetch - update state to display the data received
 
-        fetch(api, options)
-        .then((response) => response.json())
-        .then((data) => {
+        // First fetch - update state to display the data received
+        fetch(api, options).then((response) => response.json()).then((data) => {
+          
           counter.current = 1 // Reset the counter
           tracePages.current = [...data.data]
           localRecordCount.current = data.page.totalCount
@@ -71,15 +63,16 @@ export const ApiProvider = ({ children }) => {
           setTraces(tracePages.current)
           data.page.totalCount > env.API_PAGE_SIZE ? setDownloadedRecordCount(counter.current * env.API_PAGE_SIZE) : setDownloadedRecordCount(data.page.totalCount)
           if (data.page.next) fetchTraces(data.page.next) // If there is a cursor, loop
+
         });
 
       } else {
+        
         queryParams.set("cursor", cursor)
         api.search = queryParams
         
-        fetch(api, options)
-        .then((response) => response.json())
-        .then((data) => {
+        fetch(api, options).then((response) => response.json()).then((data) => {
+          
           counter.current += 1  
           tracePages.current = [...tracePages.current, ...data.data]
           console.log('Fetching Page', counter.current)
@@ -93,6 +86,7 @@ export const ApiProvider = ({ children }) => {
             setTraces(tracePages.current)
             tracePages.current = []
           }
+
         });
 
       }

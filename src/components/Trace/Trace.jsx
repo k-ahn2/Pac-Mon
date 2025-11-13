@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const TraceComponentWrapper = styled.div`
@@ -21,42 +20,40 @@ const Tag = styled.span`
     padding: 0em 0.3em;
     margin: 0em 0.1em;
     border-radius: 0.2em;
+    color: white;
+    background-color: gray;
 `
 
 export const Trace = (props) => {
 
     const trace = props.trace.report
-    
-    useEffect(() => {
-        
-    }, [props]);
-
-    const callsigns = `${trace.srce} to ${trace.dest}`
-    const headers = `<${trace.l2Type} ${trace.cr}>`
     const timestamp = new Date(props.trace.timestamp)
 
     const generateTags = () => {
         const tags = []
-        if (trace.l2Type == 'C') tags.push(<Tag style={{ backgroundColor: 'green', color: 'white' }}>CONN</Tag>)
-        if (trace.l2Type == 'D') tags.push(<Tag style={{ backgroundColor: 'red', color: 'white' }}>DISC</Tag>)
-        if (trace.l2Type == 'UA') tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>ACK</Tag>)
-        if (trace.ptcl == 'NET/ROM') tags.push(<Tag style={{ backgroundColor: 'purple', color: 'white' }}>NET/ROM</Tag>)
+        
+        if (trace.l2Type == 'C') tags.push(<Tag style={{ backgroundColor: 'green' }}>CONN</Tag>)
+        if (trace.l2Type == 'D') tags.push(<Tag style={{ backgroundColor: 'red' }}>DISC</Tag>)
+        if (trace.l2Type == 'UA') tags.push(<Tag>ACK</Tag>)
+        if (trace.ptcl == 'NET/ROM') tags.push(<Tag style={{ backgroundColor: 'purple' }}>NET/ROM</Tag>)
+        if (trace.srcUser) tags.push(<Tag style={{ backgroundColor: 'green' }}>{trace.srcUser}</Tag>)
         
         if (trace.l4type && (trace.l4type == 'CONN REQ' || trace.l4type == 'CONN ACK')) { 
-            tags.push(<Tag style={{ backgroundColor: 'green', color: 'white' }}>{ trace.l4type }</Tag>)
+            tags.push(<Tag style={{ backgroundColor: 'green' }}>{ trace.l4type }</Tag>)
         } else if (trace.l4type && (trace.l4type == 'DISC REQ' || trace.l4type == 'DISC ACK')) { 
-            tags.push(<Tag style={{ backgroundColor: 'red', color: 'white' }}>{ trace.l4type }</Tag>)
+            tags.push(<Tag style={{ backgroundColor: 'red' }}>{ trace.l4type }</Tag>)
         } else if (trace.l4type) {
-            tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>{ trace.l4type }</Tag>)
+            tags.push(<Tag>{ trace.l4type }</Tag>)
         } 
 
-        if (trace.l3dst == 'L3RTT') tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>INP3 RTT</Tag>)
+        if (trace.l3dst == 'L3RTT') tags.push(<Tag>INP3 RTT</Tag>)
+        if (trace.type == 'NODES') tags.push(<Tag>NODES</Tag>)
 
-        if (trace.type == 'NODES') tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>NODES</Tag>)
+        if (props.showNetRomCircuits && trace.fromCct) tags.push(<Tag style={{ backgroundColor: 'purple' }}>from={trace.fromCct}</Tag>)
+        if (props.showNetRomCircuits && trace.toCct) tags.push(<Tag style={{ backgroundColor: 'purple' }}>to={trace.toCct}</Tag>)
 
-        if (props.showPayLen && trace.payLen) tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>plen={trace.payLen}</Tag>)
-        if (props.showPayLen && trace.ilen) tags.push(<Tag style={{ backgroundColor: 'gray', color: 'white' }}>ilen={trace.ilen}</Tag>)
-
+        if (props.showPayLen && trace.payLen) tags.push(<Tag>plen={trace.payLen}</Tag>)
+        if (props.showPayLen && trace.ilen) tags.push(<Tag>ilen={trace.ilen}</Tag>)
 
         return tags
     }
@@ -73,8 +70,8 @@ export const Trace = (props) => {
                     </TraceData>
                     <TraceData>
                         {trace.dirn == 'rcvd' ? 
-                            <Tag style={{ backgroundColor: 'green', color: 'white' }}>RX</Tag> : 
-                            <Tag style={{ backgroundColor: 'red', color: 'white' }}>TX</Tag>
+                            <Tag style={{ backgroundColor: 'green' }}>RX</Tag> : 
+                            <Tag style={{ backgroundColor: 'red' }}>TX</Tag>
                         }
                     </TraceData>
                     <TraceData>
@@ -82,15 +79,15 @@ export const Trace = (props) => {
                     </TraceData>
                     { props.showSequenceCounters && 
                     <TraceData>
-                        { trace.tseq >= 0 && <Tag style={{ backgroundColor: 'red', color: 'white' }}>{trace.tseq}</Tag>}
-                        { trace.rseq >= 0 && <Tag style={{ backgroundColor: 'green', color: 'white' }}>{trace.rseq}</Tag>}
+                        { trace.tseq >= 0 && <Tag style={{ backgroundColor: 'red' }}>{trace.tseq}</Tag>}
+                        { trace.rseq >= 0 && <Tag style={{ backgroundColor: 'green' }}>{trace.rseq}</Tag>}
                     </TraceData>                    
                     }
                     <TraceData>
-                        {callsigns}
+                        {`${trace.srce} to ${trace.dest}`}
                     </TraceData>
                     <TraceData>
-                        {headers}
+                        {`<${trace.l2Type} ${trace.cr}>`}
                     </TraceData>
                     <TraceData>
                         { generateTags() }

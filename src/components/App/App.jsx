@@ -1,26 +1,30 @@
+// React & Pac-Mon
 import { useState, useContext, useEffect, useRef } from 'react'
 import { ApiContext } from '../../contexts/ApiContext'
-import moment from 'moment';
+import Trace from '../Trace/Trace';
+import * as env from '../../env/env'
 import './App.css'
+import appIcon from '../../images/appIcon1.png'
+// Bootstrap
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Image from 'react-bootstrap/Image';
+import { Col, Row } from 'react-bootstrap';
+import Badge from 'react-bootstrap/Badge';
+import { Form, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Trace from '../Trace/Trace';
+// MUI
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { Col, Row } from 'react-bootstrap';
-import styled from "styled-components";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Chip from '@mui/material/Chip';
+// Other
+import moment from 'moment';
 import 'moment/locale/en-gb';
-import Image from 'react-bootstrap/Image';
-import appIcon from '../../images/appIcon1.png'
-import Badge from 'react-bootstrap/Badge';
-import { Form, Modal } from 'react-bootstrap';
 import JSONPretty from 'react-json-pretty';
-import * as env from '../../env/env'
-import ProgressBar from 'react-bootstrap/ProgressBar';
 
 function App() {
   
@@ -31,74 +35,84 @@ function App() {
       donwloadedRecordCount
   } = useContext(ApiContext);
 
-  const [showJsonModal, setShowJsonModal] = useState(null)
+  // API Filter States
+  const [showJson, setShowJson] = useState(null)
   const [traceReportFrom, setTraceReportFrom] = useState('MB7NPW,GB7NBH');
-  const [traceStart, setTraceStart] = useState(moment().subtract(1,'hour'));
-  const [traceEnd, setTraceEnd] = useState(moment().subtract(50,'minutes'));
-  const [filteredTraces, setFilteredTraces] = useState([]);
-  const [seeCallsigns, setSeenCallsigns] = useState([]);
-
+  const [traceStart, setTraceStart] = useState(moment().subtract(15,'minutes'));
+  const [traceEnd, setTraceEnd] = useState(moment());
+  
   // Local Filter States
   const [suppressNetRom, setSuppressNetRom] = useState(false)
   const [suppressInp3, setSuppressInp3] = useState(false)
-  const [suppressL2, setSuppressL2] = useState(false)
   const [suppressUI, setSuppressUI] = useState(true)
   const [suppressNodes, setSuppressNodes] = useState(true)
   const [showSequenceCounters, setShowSequenceCounters] = useState(false)
+  const [showNetRomCircuits, setShowNetRomCircuits] = useState(false)
   const [showPayLen, setShowPayLen] = useState(false)
 
-  useEffect(() => {
-    console.log(traceReportFrom)
-  }, [traceReportFrom]);
-
+  // Data States
+  const [filteredTraces, setFilteredTraces] = useState([]);
+  const [seenNetRomCircuits, setSeenNetRomCircuits] = useState([]);
+  const [seenCallsigns, setSeenCallsigns] = useState([]);
+  
+  // Re-run the filter if any of the local filter states change
   useEffect(() => {
     filterTraces()
-  }, [traces, suppressNetRom, suppressInp3, suppressL2, suppressUI, suppressNodes]);
+  }, [traces, suppressNetRom, suppressInp3, suppressUI, suppressNodes]);
 
   const filterTraces = () => {
-      
-    const localSeenCallsigns = []
-
+    
+    // Filter the overall traces array based on the selected options
     const localFilteredTraces = traces.filter(t => {
       if (suppressNetRom && t.report.ptcl == 'NET/ROM') return false
       if (suppressInp3 && t.report.l3type == 'INP3') return false
       if (suppressNodes && t.report.type == 'NODES') return false
       if (suppressUI && t.report.l2Type == 'UI') return false
 
-      const tmpArray = ['MB7NPW', 'G4WQG']
-      
-      if (t.report.ptcl && t.report.ptcl == 'NET/ROM') {
-        //if ((t.report.l3src != tmpArray[0] || t.report.l3dst != tmpArray[1]) && (t.report.l3src != tmpArray[1] || t.report.l3dst != tmpArray[0])) return false
-      }
-
       //if ((t.report.srce != tmpArray[0] || t.report.dest != tmpArray[1]) && (t.report.srce != tmpArray[1] || t.report.dest != tmpArray[0])) return false
 
       return true
     })
 
+    // Iterate the filtered traces to extract source and destination callsigns 
+
+    const tmpSeenCcts = []
+    const tmpSeenCallsigns = []
+
     localFilteredTraces.map(t => {
+      
+      if (t.report.ptcl == 'NET/ROM' && t.report.toCct) {
+        // Add NET/ROM circuits
+        const circuitObject = {}
+        circuitObject.toCct = t.report.toCct
+        circuitObject.l3src = t.report.l3src
+        circuitObject.l3dst = t.report.l3dst
 
-      const traceObject = []
+        if (tmpSeenCcts.filter(c => JSON.stringify(c) === JSON.stringify(circuitObject)).length == 0) {
+          tmpSeenCcts.push(circuitObject)
+        }        
 
-      if (t.report.ptcl && t.report.ptcl == 'NET/ROM') {
-        traceObject.push(t.report.l3src)
-        traceObject.push(t.report.l3dst)
-      } else {
-        traceObject.push(t.report.srce)
-        traceObject.push(t.report.dest)
       }
 
-      traceObject.sort()
+      // Add callsigns
+      const callsignArray = []
+      callsignArray.push(t.report.srce)
+      callsignArray.push(t.report.dest)
 
-      if (localSeenCallsigns.filter(t => JSON.stringify(t) === JSON.stringify(traceObject)).length == 0) {
-        localSeenCallsigns.push(traceObject)
+      callsignArray.sort()
+
+      if (tmpSeenCallsigns.filter(t => JSON.stringify(t) === JSON.stringify(callsignArray)).length == 0) {
+        tmpSeenCallsigns.push(callsignArray)
       }
 
     })
 
-    console.log(localSeenCallsigns)
+    console.log('Seen NET/ROM Circuits', tmpSeenCcts)
+    console.log('Seen L2 Callsigns', tmpSeenCallsigns)
 
     setFilteredTraces(localFilteredTraces)
+    setSeenNetRomCircuits(tmpSeenCcts.sort((a,b) => a.toCct - b.toCct))
+    setSeenCallsigns(tmpSeenCallsigns)
     
   }
 
@@ -108,15 +122,15 @@ function App() {
     },
   });
 
-  const jsonModal = (trace) => {
+  const jsonModal = () => {
         
     return (
-      <Modal show={showJsonModal}>
+      <Modal show={showJson}>
         <Modal.Dialog>
-            <Modal.Header closeButton onClick={() => setShowJsonModal(false)}>
+            <Modal.Header closeButton onClick={() => setShowJson(false)}>
             </Modal.Header>
             <Modal.Body>
-                <JSONPretty id="json-pretty" data={showJsonModal}></JSONPretty>
+                <JSONPretty id="json-pretty" data={showJson}></JSONPretty>
             </Modal.Body>
         </Modal.Dialog>
       </Modal>
@@ -197,14 +211,82 @@ function App() {
             <Button style={{ width: '100%' }} onClick={() => traceFetchHandler()}>Fetch Data</Button>
           </Col>
         </Row>
+        <hr style={{ margin: '0.5rem 0rem' }}/>
+        { traces.length > 0 && <>
         <Row>
           <Col>
-            <Badge style={{ padding: '0.5em 0em', width: '100%', marginTop: '0.5rem'}} bg={donwloadedRecordCount < recordCount ? "danger" : "success"}>{recordCount && `${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Records Returned`}</Badge>
+            <Badge style={{ padding: '0.5em 0em', width: '100%', marginBottom: '0.5rem'}} bg={donwloadedRecordCount < recordCount ? "danger" : "success"}>{recordCount && `${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Traces Returned`}</Badge>
             {/* <ProgressBar variant="success" now={Math.round(Number(donwloadedRecordCount/recordCount)*100)} label={`${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Records Returned`} />; */}
           </Col>
         </Row>
-        <hr style={{ margin: '0.5rem 0rem' }}/>
-        { traces.length > 0 && <>
+          <Row>
+            <Col sm={6}>
+              <Autocomplete
+                multiple
+                id="tags-outlined"
+                options={seenNetRomCircuits}
+                getOptionLabel={(c) => `${c.toCct}: ${c.l3src} <--> ${c.l3dst}`}
+                // defaultValue={[top100Films[0]]}
+                sx={{
+                    "& .MuiOutlinedInput-root": {
+                        paddingTop: 0, paddingBottom: 0, marginBottom: '6px'
+                    },
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    placeholder="Seen NET/ROM Circuits"
+                  />
+                )}
+                renderValue={(values, getItemProps) =>
+                    values.map((option, index) => {
+                      const { key, ...itemProps } = getItemProps({ index });
+                      return (
+                          <Chip
+                              key={key}
+                              label={`${option.toCct}: ${option.l3src} <--> ${option.l3dst}`}
+                              {...itemProps}
+                              sx={{ fontSize: "0.9em", borderRadius: '5px', color: 'white', backgroundColor: 'purple', height: 'auto', padding: '2px', '& .MuiChip-deleteIcon': { color: 'white' } }}
+                          />
+                      );
+                    })
+                }
+              />
+            </Col>
+            <Col sm={6}>
+              <Autocomplete
+                multiple
+                id="tags-outlined"
+                options={seenCallsigns}
+                getOptionLabel={(sc) => `${sc[0]} <--> ${sc[1]}}`}
+                // defaultValue={[top100Films[0]]}
+                sx={{
+                    "& .MuiOutlinedInput-root": {
+                        paddingTop: 0, paddingBottom: 0, marginBottom: '6px'
+                    },
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    placeholder="Seen L2 Callsigns"
+                  />
+                )}
+                renderValue={(values, getItemProps) =>
+                    values.map((option, index) => {
+                      const { key, ...itemProps } = getItemProps({ index });
+                      return (
+                          <Chip
+                              key={key}
+                              label={`${option[0]} <--> ${option[1]}}`}
+                              {...itemProps}
+                              sx={{ fontSize: "0.9em", borderRadius: '5px', color: 'white', backgroundColor: 'gray', height: 'auto', padding: '2px', marginTop: '0.5px', '& .MuiChip-deleteIcon': { color: 'white' } }}
+                          />
+                      );
+                    })
+                }
+              />
+            </Col>
+          </Row>            
             <Row>
                 <Col>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -245,6 +327,12 @@ function App() {
                       label="Show Payload Length"
                       onChange={(e) => setShowPayLen(e.target.checked)}
                     />
+                    &nbsp;&nbsp;
+                    <Form.Check
+                      type="switch"
+                      label="Show NET/ROM Circuits"
+                      onChange={(e) => setShowNetRomCircuits(e.target.checked)}
+                    />
                     <div style={{ marginLeft: 'auto' }}>Local Count: {filteredTraces.length}</div>
                   </div>
                 </Col>
@@ -256,8 +344,8 @@ function App() {
           <Row>
             {
               filteredTraces && filteredTraces.map(t => {
-                return <div className="traceContainer" onClick={() => setShowJsonModal(t)}>
-                    <Trace trace={t} showSequenceCounters={showSequenceCounters} showPayLen={showPayLen}/>
+                return <div className="traceContainer" onClick={() => setShowJson(t)}>
+                    <Trace trace={t} showSequenceCounters={showSequenceCounters} showPayLen={showPayLen} showNetRomCircuits={showNetRomCircuits}/>
                   </div>
               })
             }
