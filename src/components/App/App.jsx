@@ -42,6 +42,10 @@ function App() {
   const [traceEnd, setTraceEnd] = useState(moment());
   
   // Local Filter States
+  const iteratingLocalFilter = useRef([])
+  
+  const [selectedNetRomCircuits, setSelectedNetRomCircuits] = useState([])
+  const [selectedL2Callsigns, setSelectedL2Callsigns] = useState([])
   const [suppressNetRom, setSuppressNetRom] = useState(false)
   const [suppressInp3, setSuppressInp3] = useState(false)
   const [suppressUI, setSuppressUI] = useState(true)
@@ -58,12 +62,53 @@ function App() {
   // Re-run the filter if any of the local filter states change
   useEffect(() => {
     filterTraces()
-  }, [traces, suppressNetRom, suppressInp3, suppressUI, suppressNodes]);
+  }, [traces, selectedNetRomCircuits, suppressNetRom, suppressInp3, suppressUI, suppressNodes]);
+
+useEffect(() => {
+    //console.log(selectedNetRomCircuits)
+  }, [selectedNetRomCircuits]);
 
   const filterTraces = () => {
     
+    // STEP 1 of 3
+    // Filter traces based on selected L2 callsigns and/or NET/ROM circuits
+
+    iteratingLocalFilter.current = traces
+
+    if (selectedNetRomCircuits.length > 0) {
+      console.log('selected netrom ccts')
+      iteratingLocalFilter.current = traces.filter(t => {
+        const validTrace = selectedNetRomCircuits.filter(c => {
+          if (t.report.toCct && t.report.toCct == c.toCct) {
+            return true
+          } 
+        })
+        if (validTrace.length > 0) return true
+        return false
+      })
+
+      console.log(iteratingLocalFilter.current)
+    } 
+
+    // if (selectedL2Callsigns.length > 0) {
+    //   console.log('selected callsigns')
+    //   iteratingLocalFilter.current = iteratingLocalFilter.filter(t => {
+    //     const validTrace = selectedL2Callsigns.filter(c => {
+    //       if (t.report.toCct && t.report.toCct == c.toCct) {
+    //         return true
+    //       } 
+    //     })
+    //     if (validTrace.length > 0) return true
+    //     return false
+    //   })
+
+    //   console.log(iteratingLocalFilter.current)
+    // }     
+
+    // STEP 2 of 3
     // Filter the overall traces array based on the selected options
-    const localFilteredTraces = traces.filter(t => {
+    
+    const localFilteredTraces = iteratingLocalFilter.current.filter(t => {
       if (suppressNetRom && t.report.ptcl == 'NET/ROM') return false
       if (suppressInp3 && t.report.l3type == 'INP3') return false
       if (suppressNodes && t.report.type == 'NODES') return false
@@ -74,6 +119,7 @@ function App() {
       return true
     })
 
+    // STEP 3 of 3
     // Iterate the filtered traces to extract source and destination callsigns 
 
     const tmpSeenCcts = []
@@ -81,7 +127,8 @@ function App() {
 
     localFilteredTraces.map(t => {
       
-      if (t.report.ptcl == 'NET/ROM' && t.report.toCct) {
+      if (selectedNetRomCircuits.length == 0 && t.report.ptcl == 'NET/ROM' && t.report.toCct) {
+        
         // Add NET/ROM circuits
         const circuitObject = {}
         circuitObject.toCct = t.report.toCct
@@ -92,6 +139,7 @@ function App() {
           tmpSeenCcts.push(circuitObject)
         }        
 
+        setSeenNetRomCircuits(tmpSeenCcts.sort((a,b) => a.toCct - b.toCct))
       }
 
       // Add callsigns
@@ -111,7 +159,6 @@ function App() {
     console.log('Seen L2 Callsigns', tmpSeenCallsigns)
 
     setFilteredTraces(localFilteredTraces)
-    setSeenNetRomCircuits(tmpSeenCcts.sort((a,b) => a.toCct - b.toCct))
     setSeenCallsigns(tmpSeenCallsigns)
     
   }
@@ -226,7 +273,7 @@ function App() {
                 id="tags-outlined"
                 options={seenNetRomCircuits}
                 getOptionLabel={(c) => `${c.toCct}: ${c.l3src} <--> ${c.l3dst}`}
-                // defaultValue={[top100Films[0]]}
+                onChange={(event, value) => setSelectedNetRomCircuits(value)}
                 sx={{
                     "& .MuiOutlinedInput-root": {
                         paddingTop: 0, paddingBottom: 0, marginBottom: '6px'
@@ -258,7 +305,8 @@ function App() {
                 multiple
                 id="tags-outlined"
                 options={seenCallsigns}
-                getOptionLabel={(sc) => `${sc[0]} <--> ${sc[1]}}`}
+                getOptionLabel={(sc) => `${sc[0]} <--> ${sc[1]}`}
+                onChange={(event, value) => setSelectedL2Callsigns(value)}
                 // defaultValue={[top100Films[0]]}
                 sx={{
                     "& .MuiOutlinedInput-root": {

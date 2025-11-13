@@ -53,7 +53,7 @@ export const Trace = (props) => {
         if (props.showNetRomCircuits && trace.toCct) tags.push(<Tag style={{ backgroundColor: 'purple' }}>to={trace.toCct}</Tag>)
 
         if (props.showPayLen && trace.payLen) tags.push(<Tag>plen={trace.payLen}</Tag>)
-        if (props.showPayLen && trace.ilen) tags.push(<Tag>ilen={trace.ilen}</Tag>)
+        // if (props.showPayLen && trace.ilen) tags.push(<Tag>ilen={trace.ilen}</Tag>)
 
         return tags
     }
