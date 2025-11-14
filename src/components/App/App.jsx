@@ -59,6 +59,10 @@ function App() {
   const [filteredTraces, setFilteredTraces] = useState([]);
   const [seenNetRomCircuits, setSeenNetRomCircuits] = useState([]);
   const [seenCallsigns, setSeenCallsigns] = useState([]);
+
+  // Search Hides
+  const [toggleApiSearch, setToggleApiSearch] = useState(false);
+  const [toggleFilters, setToggleFilters] = useState(false);
   
   // Re-run the filter if any of the local filter states change
   useEffect(() => {
@@ -209,11 +213,8 @@ function App() {
       <Modal show={showAlert} onClick={() => setShowAlert(false)}>
         <Modal.Dialog>
             <Modal.Header closeButton>
-              Alert
+              {showAlert}
             </Modal.Header>
-            <Modal.Body>
-                {showAlert}
-            </Modal.Body>
         </Modal.Dialog>
       </Modal>
     )
@@ -236,7 +237,7 @@ function App() {
 
   const traceFetchHandler = () => {
 
-    if (traceStart.isAfter(traceEnd)) alert('Start Date must be earlier than End Date')
+    if (traceStart.isAfter(traceEnd)) setShowAlert('Start Date must be earlier than End Date')
 
     const queryParams = new URLSearchParams();
 
@@ -279,7 +280,7 @@ function App() {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row style={{ display: toggleApiSearch ? 'none' : 'flex' }}>
           <Col sm={3}>
             <TextField 
               label='Report(s) From' 
@@ -330,12 +331,13 @@ function App() {
               bg={donwloadedRecordCount < recordCount ? "danger" : "success"}
             >
               {donwloadedRecordCount == 3000 ? 'Maximum ' : null}{recordCount && `${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Available Traces Downloaded`}
-              &nbsp;&nbsp;{<span style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => linkToClipboard()}>Get Search Link</span>}
+              &nbsp;&nbsp;<span style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setToggleApiSearch(!toggleApiSearch)}>{toggleApiSearch ? 'Show' : 'Hide'} API Search</span>
+              &nbsp;&nbsp;<span style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => linkToClipboard()}>Get Search Link</span>
             </Badge>
             {/* <ProgressBar variant="success" now={Math.round(Number(donwloadedRecordCount/recordCount)*100)} label={`${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Records Returned`} />; */}
           </Col>
         </Row>
-          <Row>
+          <Row style={{ display: toggleFilters ? 'none' : 'flex' }}>
             <Col sm={6}>
               <Autocomplete
                 multiple
@@ -404,7 +406,7 @@ function App() {
               />
             </Col>
           </Row>            
-          <Row>
+          <Row style={{ display: toggleFilters ? 'none' : 'flex' }}>
             <Col sm={3}>
               <Form.Check
                 defaultChecked={suppressNodes}
@@ -436,7 +438,7 @@ function App() {
               />
             </Col>
           </Row>            
-          <Row>
+          <Row style={{ display: toggleFilters ? 'none' : 'flex' }}>
             <Col sm={3}>
               <Form.Check
                 type="switch"
@@ -461,7 +463,10 @@ function App() {
           </Row>
           <Row>
             <Col>
-              <Badge style={{ padding: '0.5em 0em', width: '100%', marginBottom: '0.5rem'}} bg={"secondary"}>{filteredTraces.length.toLocaleString()} Traces After Filtering</Badge>
+              <Badge style={{ padding: '0.5em 0em', width: '100%', marginBottom: '0.5rem'}} bg={"secondary"}>
+                {filteredTraces.length.toLocaleString()} Traces After Filtering
+                &nbsp;<span style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setToggleFilters(!toggleFilters)}>{toggleFilters ? 'Show' : 'Hide'} Filters</span>
+              </Badge>
             </Col>
           </Row>
           <hr style={{ margin: '0.5rem 0rem' }}/>
