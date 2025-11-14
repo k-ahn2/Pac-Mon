@@ -36,10 +36,11 @@ function App() {
   } = useContext(ApiContext);
 
   // API Filter States
-  const [showJson, setShowJson] = useState(null)
+  const [showJson, setShowJson] = useState(false)
+  const [showAlert, setShowAlert] = useState(false)
   const [traceReportFrom, setTraceReportFrom] = useState('MB7NPW,GB7NBH');
-  const [traceStart, setTraceStart] = useState(moment().subtract(15,'minutes'));
-  const [traceEnd, setTraceEnd] = useState(moment());
+  const [traceStart, setTraceStart] = useState(null);
+  const [traceEnd, setTraceEnd] = useState(null);
   
   // Local Filter States
   const iteratingLocalFilter = useRef([])
@@ -61,15 +62,45 @@ function App() {
   
   // Re-run the filter if any of the local filter states change
   useEffect(() => {
+    if (traces.length == 0) return
     filterTraces()
   }, [traces, selectedNetRomCircuits, selectedL2Callsigns, suppressNetRom, suppressInp3, suppressUI, suppressNodes]);
 
-useEffect(() => {
-    //console.log(selectedNetRomCircuits)
-  }, [selectedNetRomCircuits]);
+  useEffect(() => {
+      const urlParams = new URLSearchParams(document.location.search);
+      
+      const urlTraceStart = moment(urlParams.get('ts'))
+      const urlTraceEnd = moment(urlParams.get('te'))
+      const urlReportFrom = urlParams.get('rf')
+
+      if (urlTraceStart.isValid()) {
+        setTraceStart(urlTraceStart)
+      } else {
+        setTraceStart(moment().subtract(15,'minutes'))
+      }
+
+      if (urlTraceEnd.isValid()) {
+        setTraceEnd(urlTraceEnd)
+      } else {
+        setTraceEnd(moment())
+      }
+
+      if (urlReportFrom) setTraceReportFrom(urlReportFrom)
+
+  }, []);
 
   const filterTraces = () => {
     
+    const api = new URL(window.location.href)    
+    const queryParams = new URLSearchParams();
+
+    queryParams.append("rf", traceReportFrom)
+    queryParams.append("ts", traceStart.format('YYYY-MM-DD[T]HH:mm:ss[Z]'))
+    queryParams.append("te", traceEnd.format('YYYY-MM-DD[T]HH:mm:ss[Z]'))
+
+    api.search = queryParams
+    window.history.pushState('', '', api)
+
     // STEP 1 of 3
     // Filter traces based on selected L2 callsigns and/or NET/ROM circuits
 
@@ -172,22 +203,40 @@ useEffect(() => {
     },
   });
 
-  const jsonModal = () => {
-        
+  const alertModal = () => {
+    
     return (
-      <Modal show={showJson}>
+      <Modal show={showAlert} onClick={() => setShowAlert(false)}>
         <Modal.Dialog>
-            <Modal.Header closeButton onClick={() => setShowJson(false)}>
+            <Modal.Header closeButton>
+              Alert
             </Modal.Header>
             <Modal.Body>
-                <JSONPretty id="json-pretty" data={showJson}></JSONPretty>
+                {showAlert}
             </Modal.Body>
         </Modal.Dialog>
       </Modal>
     )
   }
 
+  const jsonModal = () => {
+        
+    return (
+        <Modal show={showJson}>
+          <Modal.Dialog>
+              <Modal.Header closeButton onClick={() => setShowJson(false)}>
+              </Modal.Header>
+              <Modal.Body>
+                  <JSONPretty id="json-pretty" data={showJson}></JSONPretty>
+              </Modal.Body>
+          </Modal.Dialog>
+        </Modal>
+    )
+  }
+
   const traceFetchHandler = () => {
+
+    if (traceStart.isAfter(traceEnd)) alert('Start Date must be earlier than End Date')
 
     const queryParams = new URLSearchParams();
 
@@ -196,16 +245,26 @@ useEffect(() => {
     })
 
     queryParams.append("limit", env.API_PAGE_SIZE)
-    queryParams.append("from", traceStart.format('YYYY-MM-DD[T]HH:mm:[00Z]'))
-    queryParams.append("to", traceEnd.format('YYYY-MM-DD[T]HH:mm:[00Z]'))
+    queryParams.append("from", traceStart.format('YYYY-MM-DD[T]HH:mm:ss[Z]'))
+    queryParams.append("to", traceEnd.format('YYYY-MM-DD[T]HH:mm:ss[Z]'))
     queryParams.append("includeCount", true)
 
     getTraces(queryParams)
 
   }
+
+  const linkToClipboard = () => {
+    
+    navigator.clipboard.writeText(window.location.href)
+
+    setShowAlert('Search link copied to clipboard')
+
+  }
+
   return (
     <>
     { jsonModal() }
+    { alertModal() }
     <ThemeProvider theme={darkTheme}>
       <Container fluid className='app-container'>
         <Row>
@@ -213,7 +272,7 @@ useEffect(() => {
             <div style={{ margin: '0.5rem 0rem 0.7rem 0rem', display: 'flex', alignItems: 'center' }}>
               <Image src={appIcon} style={{ height: '4em' }} />
               <div style={{ margin: '0px 5px' }}>
-                <pre style={{ overflow: 'hidden', fontSize: '1.8em', marginBottom: '0px', marginBottom: '0px', lineHeight: '1em' }}>Pac-Mon</pre>
+                <pre style={{ overflow: 'hidden', fontSize: '1.8em', marginBottom: '0px', lineHeight: '1em' }}>Pac-Mon</pre>
                 <pre style={{ marginLeft: '2px', marginBottom: '0px', whiteSpace: 'pre-wrap'  }}>Search, Filter and Analyse AX.25 Trace data</pre>
               </div>
               <hr />
@@ -235,11 +294,11 @@ useEffect(() => {
               <DateTimePicker 
                 sx={{ width: '100%' }}
                 label="Trace Start"
-                format="DD/MM/YYYY HH:mm"
+                format="DD/MM/YYYY HH:mm:ss"
                 slotProps={{ textField: { size: 'small' } }}
-                defaultValue={traceStart}
+                value={traceStart}
                 onChange={(newValue) => setTraceStart(newValue)}
-                views={['year', 'day', 'hours', 'minutes' ]}
+                views={['year', 'day', 'hours', 'minutes', 'seconds' ]}
                 ampm={false}
               />
             </LocalizationProvider>
@@ -249,11 +308,11 @@ useEffect(() => {
               <DateTimePicker 
                 sx={{ width: '100%' }}
                 label="Trace End"
-                format="DD/MM/YYYY HH:mm"
+                format="DD/MM/YYYY HH:mm:ss"
                 slotProps={{ textField: { size: 'small' } }}
                 value={traceEnd}
                 onChange={(newValue) => setTraceEnd(newValue)}
-                views={['year', 'day', 'hours', 'minutes' ]}
+                views={['year', 'day', 'hours', 'minutes', 'seconds' ]}
                 ampm={false}
               />
             </LocalizationProvider>
@@ -266,7 +325,13 @@ useEffect(() => {
         { traces.length > 0 && <>
         <Row>
           <Col>
-            <Badge style={{ padding: '0.5em 0em', width: '100%', marginBottom: '0.5rem'}} bg={donwloadedRecordCount < recordCount ? "danger" : "success"}>{donwloadedRecordCount == 3000 ? 'Maximum ' : null}{recordCount && `${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Available Traces Downloaded`}</Badge>
+            <Badge 
+              style={{ padding: '0.5em 0em', width: '100%', marginBottom: '0.5rem'}} 
+              bg={donwloadedRecordCount < recordCount ? "danger" : "success"}
+            >
+              {donwloadedRecordCount == 3000 ? 'Maximum ' : null}{recordCount && `${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Available Traces Downloaded`}
+              &nbsp;&nbsp;{<span style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => linkToClipboard()}>Get Search Link</span>}
+            </Badge>
             {/* <ProgressBar variant="success" now={Math.round(Number(donwloadedRecordCount/recordCount)*100)} label={`${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Records Returned`} />; */}
           </Col>
         </Row>

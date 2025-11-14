@@ -27,7 +27,7 @@ const Tag = styled.span`
 export const Trace = (props) => {
 
     const trace = props.trace.report
-    const timestamp = new Date(props.trace.timestamp)
+    const timestamp = (props.trace.report.time) ? new Date(props.trace.report.time*1000) : new Date(props.trace.timestamp)
 
     const generateTags = () => {
         const tags = []
@@ -80,15 +80,15 @@ export const Trace = (props) => {
                     </TraceData>
                     { props.showSequenceCounters && 
                     <TraceData>
-                        { trace.tseq >= 0 && <Tag style={{ backgroundColor: 'red' }}>{trace.tseq}</Tag>}
-                        { trace.rseq >= 0 && <Tag style={{ backgroundColor: 'green' }}>{trace.rseq}</Tag>}
+                        { trace.tseq >= 0 && <Tag style={{ backgroundColor: 'red' }}>S{trace.tseq}</Tag>}
+                        { trace.rseq >= 0 && <Tag style={{ backgroundColor: 'green' }}>R{trace.rseq}</Tag>}
                     </TraceData>                    
                     }
                     <TraceData>
                         {`${trace.srce} to ${trace.dest}`}
                     </TraceData>
                     <TraceData>
-                        {`<${trace.l2Type} ${trace.cr}>`}
+                        {`<${trace.l2Type} ${trace.cr}${trace.pf ? ` ${trace.pf}` : ''}>`}
                     </TraceData>
                     <TraceData>
                         { generateTags() }
