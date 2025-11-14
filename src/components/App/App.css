@@ -1,6 +1,8 @@
 .app-container {
-  height: 100vh;
-  width: 100vw;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  max-height: 100vh;
 }
 
 .__json-pretty__ {

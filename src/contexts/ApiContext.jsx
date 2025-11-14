@@ -73,7 +73,11 @@ export const ApiProvider = ({ children }) => {
         
         fetch(api, options).then((response) => response.json()).then((data) => {
           
-          counter.current += 1  
+          counter.current += 1 
+          if (counter.current > 6) {
+            setTraces(tracePages.current)
+            return
+          }
           tracePages.current = [...tracePages.current, ...data.data]
           console.log('Fetching Page', counter.current)
           if (data.page.next) {

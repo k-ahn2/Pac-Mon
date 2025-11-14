@@ -4,7 +4,7 @@ import { ApiContext } from '../../contexts/ApiContext'
 import Trace from '../Trace/Trace';
 import * as env from '../../env/env'
 import './App.css'
-import appIcon from '../../images/appIcon1.png'
+import appIcon from '../../images/pacmon.png'
 // Bootstrap
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -62,7 +62,7 @@ function App() {
   // Re-run the filter if any of the local filter states change
   useEffect(() => {
     filterTraces()
-  }, [traces, selectedNetRomCircuits, suppressNetRom, suppressInp3, suppressUI, suppressNodes]);
+  }, [traces, selectedNetRomCircuits, selectedL2Callsigns, suppressNetRom, suppressInp3, suppressUI, suppressNodes]);
 
 useEffect(() => {
     //console.log(selectedNetRomCircuits)
@@ -77,7 +77,7 @@ useEffect(() => {
 
     if (selectedNetRomCircuits.length > 0) {
       console.log('selected netrom ccts')
-      iteratingLocalFilter.current = traces.filter(t => {
+      iteratingLocalFilter.current = iteratingLocalFilter.current.filter(t => {
         const validTrace = selectedNetRomCircuits.filter(c => {
           if (t.report.toCct && t.report.toCct == c.toCct) {
             return true
@@ -87,35 +87,32 @@ useEffect(() => {
         return false
       })
 
-      console.log(iteratingLocalFilter.current)
+      console.log('Iterating Trace after NetRom Ccts', iteratingLocalFilter.current)
     } 
 
-    // if (selectedL2Callsigns.length > 0) {
-    //   console.log('selected callsigns')
-    //   iteratingLocalFilter.current = iteratingLocalFilter.filter(t => {
-    //     const validTrace = selectedL2Callsigns.filter(c => {
-    //       if (t.report.toCct && t.report.toCct == c.toCct) {
-    //         return true
-    //       } 
-    //     })
-    //     if (validTrace.length > 0) return true
-    //     return false
-    //   })
+    if (selectedL2Callsigns.length > 0) {
+      console.log('selected callsigns')
+      iteratingLocalFilter.current = iteratingLocalFilter.current.filter(t => {
+        const validTrace = selectedL2Callsigns.filter(c => {
+          if ((t.report.srce == c[0] && t.report.dest == c[1]) || (t.report.srce == c[1] && t.report.dest == c[0])){
+            return true
+          } 
+        })
+        if (validTrace.length > 0) return true
+        return false
+      })
 
-    //   console.log(iteratingLocalFilter.current)
-    // }     
+      console.log('Iterating Trace after L2 Callsigns', iteratingLocalFilter.current)
+    }     
 
     // STEP 2 of 3
     // Filter the overall traces array based on the selected options
     
     const localFilteredTraces = iteratingLocalFilter.current.filter(t => {
       if (suppressNetRom && t.report.ptcl == 'NET/ROM') return false
-      if (suppressInp3 && t.report.l3type == 'INP3') return false
+      if (suppressInp3 && t.report.type == 'INP3') return false
       if (suppressNodes && t.report.type == 'NODES') return false
       if (suppressUI && t.report.l2Type == 'UI') return false
-
-      //if ((t.report.srce != tmpArray[0] || t.report.dest != tmpArray[1]) && (t.report.srce != tmpArray[1] || t.report.dest != tmpArray[0])) return false
-
       return true
     })
 
@@ -142,15 +139,21 @@ useEffect(() => {
         setSeenNetRomCircuits(tmpSeenCcts.sort((a,b) => a.toCct - b.toCct))
       }
 
-      // Add callsigns
-      const callsignArray = []
-      callsignArray.push(t.report.srce)
-      callsignArray.push(t.report.dest)
+      if (selectedL2Callsigns.length == 0) {
+        
+        // Add callsigns
+        const callsignArray = []
+        callsignArray.push(t.report.srce)
+        callsignArray.push(t.report.dest)
 
-      callsignArray.sort()
+        callsignArray.sort()
 
-      if (tmpSeenCallsigns.filter(t => JSON.stringify(t) === JSON.stringify(callsignArray)).length == 0) {
-        tmpSeenCallsigns.push(callsignArray)
+        if (tmpSeenCallsigns.filter(t => JSON.stringify(t) === JSON.stringify(callsignArray)).length == 0) {
+          tmpSeenCallsigns.push(callsignArray)
+        }
+
+        setSeenCallsigns(tmpSeenCallsigns)
+
       }
 
     })
@@ -159,7 +162,7 @@ useEffect(() => {
     console.log('Seen L2 Callsigns', tmpSeenCallsigns)
 
     setFilteredTraces(localFilteredTraces)
-    setSeenCallsigns(tmpSeenCallsigns)
+    
     
   }
 
@@ -209,8 +212,9 @@ useEffect(() => {
           <Col>
             <div style={{ margin: '0.5rem 0rem 0.7rem 0rem', display: 'flex', alignItems: 'center' }}>
               <Image src={appIcon} style={{ height: '4em' }} />
-              <div style={{ fontSize: '2em' }}>
-                <pre style={{margin: 'auto 5px' }}>Pac-Mon</pre>
+              <div style={{ margin: '0px 5px' }}>
+                <pre style={{ overflow: 'hidden', fontSize: '1.8em', marginBottom: '0px', marginBottom: '0px', lineHeight: '1em' }}>Pac-Mon</pre>
+                <pre style={{ marginLeft: '2px', marginBottom: '0px', whiteSpace: 'pre-wrap'  }}>Search, Filter and Analyse AX.25 Trace data</pre>
               </div>
               <hr />
             </div>
@@ -262,7 +266,7 @@ useEffect(() => {
         { traces.length > 0 && <>
         <Row>
           <Col>
-            <Badge style={{ padding: '0.5em 0em', width: '100%', marginBottom: '0.5rem'}} bg={donwloadedRecordCount < recordCount ? "danger" : "success"}>{recordCount && `${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Traces Returned`}</Badge>
+            <Badge style={{ padding: '0.5em 0em', width: '100%', marginBottom: '0.5rem'}} bg={donwloadedRecordCount < recordCount ? "danger" : "success"}>{donwloadedRecordCount == 3000 ? 'Maximum ' : null}{recordCount && `${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Available Traces Downloaded`}</Badge>
             {/* <ProgressBar variant="success" now={Math.round(Number(donwloadedRecordCount/recordCount)*100)} label={`${donwloadedRecordCount.toLocaleString()} of ${recordCount.toLocaleString()} Records Returned`} />; */}
           </Col>
         </Row>
@@ -335,61 +339,71 @@ useEffect(() => {
               />
             </Col>
           </Row>            
-            <Row>
-                <Col>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Form.Check
-                      defaultChecked={suppressNodes}
-                      type="switch"
-                      label="Suppress NODES"
-                      onChange={(e) => setSuppressNodes(e.target.checked)}
-                    />
-                    &nbsp;&nbsp;
-                    <Form.Check
-                      defaultChecked={suppressUI}
-                      type="switch"
-                      label="Suppress UI"
-                      onChange={(e) => setSuppressUI(e.target.checked)}
-                    />
-                    &nbsp;&nbsp;
-                    <Form.Check
-                      type="switch"
-                      label="Suppress NET/ROM"
-                      onChange={(e) => setSuppressNetRom(e.target.checked)}
-                    />
-                    &nbsp;&nbsp;
-                    <Form.Check
-                      type="switch"
-                      label="Suppress INP3"
-                      onChange={(e) => setSuppressInp3(e.target.checked)}
-                    />
-                    &nbsp;&nbsp;
-                    <Form.Check
-                      type="switch"
-                      label="Show L2 Sequence Counters"
-                      onChange={(e) => setShowSequenceCounters(e.target.checked)}
-                    />
-                    &nbsp;&nbsp;
-                    <Form.Check
-                      type="switch"
-                      label="Show Payload Length"
-                      onChange={(e) => setShowPayLen(e.target.checked)}
-                    />
-                    &nbsp;&nbsp;
-                    <Form.Check
-                      type="switch"
-                      label="Show NET/ROM Circuits"
-                      onChange={(e) => setShowNetRomCircuits(e.target.checked)}
-                    />
-                    <div style={{ marginLeft: 'auto' }}>Local Count: {filteredTraces.length}</div>
-                  </div>
-                </Col>
-            </Row>
-            <hr style={{ margin: '0.5rem 0rem' }}/>
-          </>
+          <Row>
+            <Col sm={3}>
+              <Form.Check
+                defaultChecked={suppressNodes}
+                type="switch"
+                label="Suppress NODES"
+                onChange={(e) => setSuppressNodes(e.target.checked)}
+              />
+            </Col>
+            <Col sm={3}>
+              <Form.Check
+                defaultChecked={suppressUI}
+                type="switch"
+                label="Suppress UI"
+                onChange={(e) => setSuppressUI(e.target.checked)}
+              />
+            </Col>
+            <Col sm={3}>
+              <Form.Check
+                type="switch"
+                label="Suppress NET/ROM"
+                onChange={(e) => setSuppressNetRom(e.target.checked)}
+              />
+            </Col>
+            <Col sm={3}>
+              <Form.Check
+                type="switch"
+                label="Suppress INP3"
+                onChange={(e) => setSuppressInp3(e.target.checked)}
+              />
+            </Col>
+          </Row>            
+          <Row>
+            <Col sm={3}>
+              <Form.Check
+                type="switch"
+                label="Show L2 Counters"
+                onChange={(e) => setShowSequenceCounters(e.target.checked)}
+              />
+            </Col>
+            <Col sm={3}>
+              <Form.Check
+                type="switch"
+                label="Show Payload Length"
+                onChange={(e) => setShowPayLen(e.target.checked)}
+              />
+            </Col>
+            <Col sm={3}>
+              <Form.Check
+                type="switch"
+                label="Show NET/ROM Circuits"
+                onChange={(e) => setShowNetRomCircuits(e.target.checked)}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Badge style={{ padding: '0.5em 0em', width: '100%', marginBottom: '0.5rem'}} bg={"secondary"}>{filteredTraces.length.toLocaleString()} Traces After Filtering</Badge>
+            </Col>
+          </Row>
+          <hr style={{ margin: '0.5rem 0rem' }}/>
+        </>
         }
         {
-          <Row>
+          <Row style={{ display: 'flex', flex: 1, overflow: 'scroll'}}>
             {
               filteredTraces && filteredTraces.map(t => {
                 return <div className="traceContainer" onClick={() => setShowJson(t)}>

@@ -48,7 +48,8 @@ export const Trace = (props) => {
 
         if (trace.l3dst == 'L3RTT') tags.push(<Tag>INP3 RTT</Tag>)
         if (trace.type == 'NODES') tags.push(<Tag>NODES</Tag>)
-
+        
+        if (trace.type == 'INP3' && trace.l3type == 'Routing info') tags.push(<Tag>INP3 Routing Info</Tag>)
         if (props.showNetRomCircuits && trace.fromCct) tags.push(<Tag style={{ backgroundColor: 'purple' }}>from={trace.fromCct}</Tag>)
         if (props.showNetRomCircuits && trace.toCct) tags.push(<Tag style={{ backgroundColor: 'purple' }}>to={trace.toCct}</Tag>)
 
