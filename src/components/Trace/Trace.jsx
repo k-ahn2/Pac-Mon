@@ -80,7 +80,7 @@ export const Trace = (props) => {
                     </TraceData>
                     { props.showSequenceCounters && 
                     <TraceData>
-                        { trace.tseq >= 0 && <Tag style={{ backgroundColor: 'red' }}>S{trace.tseq}</Tag>}
+                        { trace.tseq >= 0 && trace.l2Type != 'RR' && <Tag style={{ backgroundColor: 'red' }}>S{trace.tseq}</Tag>}
                         { trace.rseq >= 0 && <Tag style={{ backgroundColor: 'green' }}>R{trace.rseq}</Tag>}
                     </TraceData>                    
                     }
@@ -88,7 +88,7 @@ export const Trace = (props) => {
                         {`${trace.srce} to ${trace.dest}`}
                     </TraceData>
                     <TraceData>
-                        {`<${trace.l2Type} ${trace.cr}${trace.pf ? ` ${trace.pf}` : ''}>`}
+                        {`<${trace.l2Type} ${trace.cr}${trace.pf ? ` ${trace.pf}` : ''}${'tseq' in trace && trace.l2Type != 'RR' ? ` S${trace.tseq}` : ''}${trace.rseq ? ` R${trace.rseq}` : ''}>`}
                     </TraceData>
                     <TraceData>
                         { generateTags() }
