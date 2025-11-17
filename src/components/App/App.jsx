@@ -44,17 +44,18 @@ function App() {
   
   // Local Filter States
   const iteratingLocalFilter = useRef([])
+
+  const [suppressNodes, setSuppressNodes] = useState(true)
+  const [suppressUI, setSuppressUI] = useState(true)
+  const [suppressNetRom, setSuppressNetRom] = useState(false)
+  const [suppressInp3, setSuppressInp3] = useState(false)
+  const [showSequenceCounters, setShowSequenceCounters] = useState(false)
+  const [showPayLen, setShowPayLen] = useState(false)
+  const [showNetRomDetails, setShowNetRomDetails] = useState(false)
   
   const [selectedNetRomCircuits, setSelectedNetRomCircuits] = useState([])
   const [selectedL2Callsigns, setSelectedL2Callsigns] = useState([])
-  const [suppressNetRom, setSuppressNetRom] = useState(false)
-  const [suppressInp3, setSuppressInp3] = useState(false)
-  const [suppressUI, setSuppressUI] = useState(true)
-  const [suppressNodes, setSuppressNodes] = useState(true)
-  const [showSequenceCounters, setShowSequenceCounters] = useState(false)
-  const [showNetRomCircuits, setShowNetRomCircuits] = useState(false)
-  const [showPayLen, setShowPayLen] = useState(false)
-
+  
   // Data States
   const [filteredTraces, setFilteredTraces] = useState([]);
   const [seenNetRomCircuits, setSeenNetRomCircuits] = useState([]);
@@ -67,15 +68,60 @@ function App() {
   // Re-run the filter if any of the local filter states change
   useEffect(() => {
     if (traces.length == 0) return
+    regenerateURL()
     filterTraces()
-  }, [traces, selectedNetRomCircuits, selectedL2Callsigns, suppressNetRom, suppressInp3, suppressUI, suppressNodes]);
+  }, [traces, 
+      selectedNetRomCircuits, 
+      selectedL2Callsigns, 
+      suppressNodes, 
+      suppressUI, 
+      suppressNetRom, 
+      suppressInp3
+  ]);
 
   useEffect(() => {
+    if (!traceStart || !traceEnd) return
+    regenerateURL()
+  }, [showSequenceCounters, 
+      showPayLen, 
+      showNetRomDetails 
+  ]);
+
+  useEffect(() => {
+      
+      // URL Search Params
+      
+      // rf = reportFrom
+      // ts = traceStart
+      // te = traceEnd
+
+      // sl2 = selectedL2Callsigns
+      // snr = selectedNetRomCircuits
+      
+      // sun = suppressNodes
+      // suui = suppressUI
+      // sunr = suppressNetRom
+      // sui3 = suppressInp3
+      // shsc = showSequenceCounters
+      // shpl = showPayloadLength
+      // snrd = showNetRomDetails
+    
       const urlParams = new URLSearchParams(document.location.search);
       
       const urlTraceStart = moment(urlParams.get('ts'))
       const urlTraceEnd = moment(urlParams.get('te'))
       const urlReportFrom = urlParams.get('rf')
+      
+      const urlSeenL2 = urlParams.getAll('sl2')
+      const urlSeenNetRom = urlParams.getAll('snr')
+      
+      const urlSuppressNodes = urlParams.get('sun')
+      const urlSuppressUI = urlParams.get('suui')
+      const urlSuppressNetRom = urlParams.get('sunr')
+      const urlSuppressInp3 = urlParams.get('sui3')
+      const urlShowSequenceCounters = urlParams.get('shsc')
+      const urlShowPayloadLength = urlParams.get('shpl')
+      const urlShowNetRomDetails = urlParams.get('snrd')
 
       if (urlTraceStart.isValid()) {
         setTraceStart(urlTraceStart)
@@ -91,19 +137,75 @@ function App() {
 
       if (urlReportFrom) setTraceReportFrom(urlReportFrom)
 
+      if (urlSeenL2.length > 0) {
+        
+        const urlSeenL2Array = urlSeenL2.map(l2Pair => { 
+          const l2PairArray = l2Pair.split(',')
+          if (l2PairArray.length == 2) return l2PairArray
+        })
+      
+        setSelectedL2Callsigns(urlSeenL2Array)
+        setSeenCallsigns(urlSeenL2Array)
+      }
+
+      if (urlSeenNetRom.length > 0) {
+        
+        const urlSeenNetRomArray = urlSeenNetRom.map(netRomCctAndCallsigns => { 
+          const netRomCctAndCallsignsArray = netRomCctAndCallsigns.split(',')
+          if (netRomCctAndCallsignsArray.length == 3) {
+            return {
+              toCct: netRomCctAndCallsignsArray[0],
+              l3src: netRomCctAndCallsignsArray[1],
+              l3dst: netRomCctAndCallsignsArray[2]
+            }
+          }
+        })
+
+        setSelectedNetRomCircuits(urlSeenNetRomArray)
+      }
+
+      console.log(urlSuppressNetRom)
+
+      if (urlShowNetRomDetails) setShowNetRomDetails(urlShowNetRomDetails == 'true' ? true : false)
+      if (urlSuppressNodes) setSuppressNodes(urlSuppressNodes == 'true' ? true : false)
+      if (urlSuppressUI) setSuppressUI(urlSuppressUI == 'true' ? true : false)
+      if (urlSuppressNetRom) setSuppressNetRom(urlSuppressNetRom == 'true' ? true : false)
+      if (urlSuppressInp3) setSuppressInp3(urlSuppressInp3 == 'true' ? true : false)
+      if (urlShowSequenceCounters) setShowSequenceCounters(urlShowSequenceCounters == 'true' ? true : false)
+      if (urlShowPayloadLength) setShowPayLen(urlShowPayloadLength == 'true' ? true : false)    
+
   }, []);
 
-  const filterTraces = () => {
-    
+  const regenerateURL = () => {
     const api = new URL(window.location.href)    
     const queryParams = new URLSearchParams();
 
     queryParams.append("rf", traceReportFrom)
     queryParams.append("ts", traceStart.format('YYYY-MM-DD[T]HH:mm:ss[Z]'))
     queryParams.append("te", traceEnd.format('YYYY-MM-DD[T]HH:mm:ss[Z]'))
+    
+    selectedL2Callsigns.map(l2PairArray => {
+       queryParams.append("sl2", l2PairArray.join(','))
+    })
+    
+    selectedNetRomCircuits.map(netRomCctAndCallsigns => {
+      const netRomCctAndCallsignsString = `${netRomCctAndCallsigns.toCct},${netRomCctAndCallsigns.l3src},${netRomCctAndCallsigns.l3dst}`
+      queryParams.append("snr", netRomCctAndCallsignsString)
+    })
+
+    if (suppressNodes) queryParams.append("sun", suppressNodes)
+    if (suppressUI) queryParams.append("suui", suppressUI)
+    if (suppressNetRom) queryParams.append("sunr", suppressNetRom)
+    if (suppressInp3) queryParams.append("sui3", suppressInp3)
+    if (showSequenceCounters) queryParams.append("shsc", showSequenceCounters)
+    if (showPayLen) queryParams.append("shpl", showPayLen)
+    if (showNetRomDetails) queryParams.append("snrd", showNetRomDetails)
 
     api.search = queryParams
     window.history.pushState('', '', api)
+  }
+
+  const filterTraces = () => {
 
     // STEP 1 of 3
     // Filter traces based on selected L2 callsigns and/or NET/ROM circuits
@@ -126,7 +228,7 @@ function App() {
     } 
 
     if (selectedL2Callsigns.length > 0) {
-      console.log('selected callsigns')
+      console.log('selected callsigns', selectedL2Callsigns)
       iteratingLocalFilter.current = iteratingLocalFilter.current.filter(t => {
         const validTrace = selectedL2Callsigns.filter(c => {
           if ((t.report.srce == c[0] && t.report.dest == c[1]) || (t.report.srce == c[1] && t.report.dest == c[0])){
@@ -344,6 +446,7 @@ function App() {
                 id="tags-outlined"
                 options={seenNetRomCircuits}
                 getOptionLabel={(c) => `${c.toCct}: ${c.l3src} <--> ${c.l3dst}`}
+                defaultValue={selectedNetRomCircuits}
                 onChange={(event, value) => setSelectedNetRomCircuits(value)}
                 sx={{
                     "& .MuiOutlinedInput-root": {
@@ -377,6 +480,7 @@ function App() {
                 id="tags-outlined"
                 options={seenCallsigns}
                 getOptionLabel={(sc) => `${sc[0]} <--> ${sc[1]}`}
+                defaultValue={selectedL2Callsigns}
                 onChange={(event, value) => setSelectedL2Callsigns(value)}
                 // defaultValue={[top100Films[0]]}
                 sx={{
@@ -409,17 +513,17 @@ function App() {
           <Row style={{ display: toggleFilters ? 'none' : 'flex' }}>
             <Col sm={3}>
               <Form.Check
-                defaultChecked={suppressNodes}
                 type="switch"
                 label="Suppress NODES"
+                checked={suppressNodes}
                 onChange={(e) => setSuppressNodes(e.target.checked)}
               />
             </Col>
             <Col sm={3}>
               <Form.Check
-                defaultChecked={suppressUI}
                 type="switch"
                 label="Suppress UI"
+                checked={suppressUI}
                 onChange={(e) => setSuppressUI(e.target.checked)}
               />
             </Col>
@@ -427,6 +531,7 @@ function App() {
               <Form.Check
                 type="switch"
                 label="Suppress NET/ROM"
+                checked={suppressNetRom}
                 onChange={(e) => setSuppressNetRom(e.target.checked)}
               />
             </Col>
@@ -434,6 +539,7 @@ function App() {
               <Form.Check
                 type="switch"
                 label="Suppress INP3"
+                checked={suppressInp3}
                 onChange={(e) => setSuppressInp3(e.target.checked)}
               />
             </Col>
@@ -443,6 +549,7 @@ function App() {
               <Form.Check
                 type="switch"
                 label="Show L2 Counters"
+                checked={showSequenceCounters}
                 onChange={(e) => setShowSequenceCounters(e.target.checked)}
               />
             </Col>
@@ -450,14 +557,16 @@ function App() {
               <Form.Check
                 type="switch"
                 label="Show Payload Length"
+                checked={showPayLen}
                 onChange={(e) => setShowPayLen(e.target.checked)}
               />
             </Col>
             <Col sm={3}>
               <Form.Check
                 type="switch"
-                label="Show NET/ROM Circuits"
-                onChange={(e) => setShowNetRomCircuits(e.target.checked)}
+                label="Show NET/ROM Details"
+                checked={showNetRomDetails}
+                onChange={(e) => setShowNetRomDetails(e.target.checked)}
               />
             </Col>
           </Row>
@@ -477,7 +586,7 @@ function App() {
             {
               filteredTraces && filteredTraces.map(t => {
                 return <div className="traceContainer" onClick={() => setShowJson(t)}>
-                    <Trace trace={t} showSequenceCounters={showSequenceCounters} showPayLen={showPayLen} showNetRomCircuits={showNetRomCircuits}/>
+                    <Trace trace={t} showSequenceCounters={showSequenceCounters} showPayLen={showPayLen} showNetRomDetails={showNetRomDetails}/>
                   </div>
               })
             }

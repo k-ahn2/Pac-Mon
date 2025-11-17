@@ -26,6 +26,8 @@ const Tag = styled.span`
 
 export const Trace = (props) => {
 
+    const l2TypesThatSuppressTseq = ['RR', 'RNR', 'REJ', 'SREJ']
+
     const trace = props.trace.report
     const timestamp = (props.trace.report.time) ? new Date(props.trace.report.time*1000) : new Date(props.trace.timestamp)
 
@@ -50,8 +52,10 @@ export const Trace = (props) => {
         if (trace.type == 'NODES') tags.push(<Tag>NODES</Tag>)
         
         if (trace.type == 'INP3' && trace.l3type == 'Routing info') tags.push(<Tag>INP3 Routing Info</Tag>)
-        if (props.showNetRomCircuits && trace.fromCct) tags.push(<Tag style={{ backgroundColor: 'purple' }}>from={trace.fromCct}</Tag>)
-        if (props.showNetRomCircuits && trace.toCct) tags.push(<Tag style={{ backgroundColor: 'purple' }}>to={trace.toCct}</Tag>)
+        if (props.showNetRomDetails && 'fromCct' in trace) tags.push(<Tag style={{ backgroundColor: 'purple' }}>{trace.fromCct}</Tag>)
+        if (props.showNetRomDetails && 'toCct' in trace && trace.l3dst != 'L3RTT') tags.push(<Tag style={{ backgroundColor: 'purple' }}>{trace.toCct}</Tag>)
+        if (props.showNetRomDetails && 'txSeq' in trace && trace.l3dst != 'L3RTT') tags.push(<Tag style={{ backgroundColor: 'red' }}>S{trace.txSeq}</Tag>)
+        if (props.showNetRomDetails && 'rxSeq' in trace && trace.l3dst != 'L3RTT') tags.push(<Tag style={{ backgroundColor: 'green' }}>R{trace.rxSeq}</Tag>)
 
         if (props.showPayLen && trace.payLen) tags.push(<Tag>plen={trace.payLen}</Tag>)
         // if (props.showPayLen && trace.ilen) tags.push(<Tag>ilen={trace.ilen}</Tag>)
@@ -80,7 +84,7 @@ export const Trace = (props) => {
                     </TraceData>
                     { props.showSequenceCounters && 
                     <TraceData>
-                        { trace.tseq >= 0 && trace.l2Type != 'RR' && <Tag style={{ backgroundColor: 'red' }}>S{trace.tseq}</Tag>}
+                        { trace.tseq >= 0 && <Tag style={{ backgroundColor: 'red' }}>S{trace.tseq}</Tag>}
                         { trace.rseq >= 0 && <Tag style={{ backgroundColor: 'green' }}>R{trace.rseq}</Tag>}
                     </TraceData>                    
                     }
@@ -88,7 +92,7 @@ export const Trace = (props) => {
                         {`${trace.srce} to ${trace.dest}`}
                     </TraceData>
                     <TraceData>
-                        {`<${trace.l2Type} ${trace.cr}${trace.pf ? ` ${trace.pf}` : ''}${'tseq' in trace && trace.l2Type != 'RR' ? ` S${trace.tseq}` : ''}${trace.rseq ? ` R${trace.rseq}` : ''}>`}
+                        {`<${trace.l2Type} ${trace.cr}${trace.pf ? ` ${trace.pf}` : ''}${'tseq' in trace ? ` S${trace.tseq}` : ''}${'rseq' in trace ? ` R${trace.rseq}` : ''}>`}
                     </TraceData>
                     <TraceData>
                         { generateTags() }
