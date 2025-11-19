@@ -27,7 +27,9 @@ import 'moment/locale/en-gb';
 import JSONPretty from 'react-json-pretty';
 
 function App() {
-  
+
+  const VERSION = 0.5
+
   const { 
       getTraces,
       traces,
@@ -54,12 +56,14 @@ function App() {
   const [showNetRomDetails, setShowNetRomDetails] = useState(false)
   
   const [selectedNetRomCircuits, setSelectedNetRomCircuits] = useState([])
+  const [selectedPorts, setSelectedPorts] = useState([])
   const [selectedL2Callsigns, setSelectedL2Callsigns] = useState([])
   
   // Data States
   const [filteredTraces, setFilteredTraces] = useState([]);
   const [seenNetRomCircuits, setSeenNetRomCircuits] = useState([]);
-  const [seenCallsigns, setSeenCallsigns] = useState([]);
+  const [seenL2Callsigns, setSeenL2Callsigns] = useState([]);
+  const [seenPorts, setSeenPorts] = useState([]);
 
   // Search Hides
   const [toggleApiSearch, setToggleApiSearch] = useState(false);
@@ -72,6 +76,7 @@ function App() {
     filterTraces()
   }, [traces, 
       selectedNetRomCircuits, 
+      selectedPorts,
       selectedL2Callsigns, 
       suppressNodes, 
       suppressUI, 
@@ -96,6 +101,7 @@ function App() {
       // te = traceEnd
 
       // sl2 = selectedL2Callsigns
+      // sp = selectedPorts
       // snr = selectedNetRomCircuits
       
       // sun = suppressNodes
@@ -112,8 +118,9 @@ function App() {
       const urlTraceEnd = moment(urlParams.get('te'))
       const urlReportFrom = urlParams.get('rf')
       
-      const urlSeenL2 = urlParams.getAll('sl2')
-      const urlSeenNetRom = urlParams.getAll('snr')
+      const urlSelectedL2 = urlParams.getAll('sl2')
+      const urlSelectedPorts = urlParams.getAll('sp')
+      const urlSelectedNetRom = urlParams.getAll('snr')
       
       const urlSuppressNodes = urlParams.get('sun')
       const urlSuppressUI = urlParams.get('suui')
@@ -137,20 +144,35 @@ function App() {
 
       if (urlReportFrom) setTraceReportFrom(urlReportFrom)
 
-      if (urlSeenL2.length > 0) {
+      if (urlSelectedL2.length > 0) {
         
-        const urlSeenL2Array = urlSeenL2.map(l2Pair => { 
+        const urlSeenL2Array = urlSelectedL2.map(l2Pair => { 
           const l2PairArray = l2Pair.split(',')
           if (l2PairArray.length == 2) return l2PairArray
         })
       
         setSelectedL2Callsigns(urlSeenL2Array)
-        setSeenCallsigns(urlSeenL2Array)
+        setSeenL2Callsigns(urlSeenL2Array)
       }
 
-      if (urlSeenNetRom.length > 0) {
+      if (urlSelectedPorts.length > 0) {
         
-        const urlSeenNetRomArray = urlSeenNetRom.map(netRomCctAndCallsigns => { 
+        const urlSelectedPortsArray = urlSelectedPorts.map(selectedPort => { 
+          const portAndCallsignObject = selectedPort.split(',')
+          if (portAndCallsignObject.length == 2) {
+            return {
+              port: portAndCallsignObject[0],
+              reportFrom: portAndCallsignObject[1]
+            }
+          }
+        })
+
+        setSelectedPorts(urlSelectedPortsArray)
+      }
+
+      if (urlSelectedNetRom.length > 0) {
+        
+        const urlSelectedNetRomArray = urlSelectedNetRom.map(netRomCctAndCallsigns => { 
           const netRomCctAndCallsignsArray = netRomCctAndCallsigns.split(',')
           if (netRomCctAndCallsignsArray.length == 3) {
             return {
@@ -161,7 +183,7 @@ function App() {
           }
         })
 
-        setSelectedNetRomCircuits(urlSeenNetRomArray)
+        setSelectedNetRomCircuits(urlSelectedNetRomArray)
       }
 
       console.log(urlSuppressNetRom)
@@ -187,7 +209,12 @@ function App() {
     selectedL2Callsigns.map(l2PairArray => {
        queryParams.append("sl2", l2PairArray.join(','))
     })
-    
+
+    selectedPorts.map(selectedPort => {
+      const selectedPortString = `${selectedPort.port},${selectedPort.reportFrom}`
+      queryParams.append("sp", selectedPortString)
+    })
+
     selectedNetRomCircuits.map(netRomCctAndCallsigns => {
       const netRomCctAndCallsignsString = `${netRomCctAndCallsigns.toCct},${netRomCctAndCallsigns.l3src},${netRomCctAndCallsigns.l3dst}`
       queryParams.append("snr", netRomCctAndCallsignsString)
@@ -205,9 +232,64 @@ function App() {
     window.history.pushState('', '', api)
   }
 
+  const findSeenCallsignsAndNetRom = () => {
+
+    const tmpSeenCcts = []
+    const tmpSeenPorts = []
+    const tmpSeenL2Callsigns = []
+
+    traces.map(t => {
+      
+      if (t.report.ptcl == 'NET/ROM' && t.report.toCct) {
+        
+        // Add NET/ROM circuits
+        const circuitObject = {}
+        circuitObject.toCct = t.report.toCct
+        circuitObject.l3src = t.report.l3src
+        circuitObject.l3dst = t.report.l3dst
+
+        if (tmpSeenCcts.filter(c => JSON.stringify(c) === JSON.stringify(circuitObject)).length == 0) {
+          tmpSeenCcts.push(circuitObject)
+        }        
+
+        setSeenNetRomCircuits(tmpSeenCcts.sort((a,b) => a.toCct - b.toCct))
+      }
+
+      // Add Ports
+      const portObject = {}
+      portObject.port = t.report.port
+      portObject.reportFrom = t.report.reportFrom
+
+      if (tmpSeenPorts.filter(t => JSON.stringify(t) === JSON.stringify(portObject)).length == 0) {
+        tmpSeenPorts.push(portObject)
+      }
+
+      setSeenPorts(tmpSeenPorts)
+
+      // Add callsigns
+      const callsignArray = []
+      callsignArray.push(t.report.srce)
+      callsignArray.push(t.report.dest)
+
+      if (tmpSeenL2Callsigns.filter(t => JSON.stringify(t) === JSON.stringify(callsignArray)).length == 0) {
+        tmpSeenL2Callsigns.push(callsignArray)
+      }
+
+      setSeenL2Callsigns(tmpSeenL2Callsigns)
+
+    })
+
+    console.log('Seen NET/ROM Circuits', tmpSeenCcts)
+    console.log('Seen Ports', tmpSeenPorts)
+    console.log('Seen L2 Callsigns', tmpSeenL2Callsigns)
+  } 
+
   const filterTraces = () => {
 
     // STEP 1 of 3
+    findSeenCallsignsAndNetRom()
+
+    // STEP 2 of 3
     // Filter traces based on selected L2 callsigns and/or NET/ROM circuits
 
     iteratingLocalFilter.current = traces
@@ -227,6 +309,21 @@ function App() {
       console.log('Iterating Trace after NetRom Ccts', iteratingLocalFilter.current)
     } 
 
+    if (selectedPorts.length > 0) {
+      console.log('selected ports')
+      iteratingLocalFilter.current = iteratingLocalFilter.current.filter(t => {
+        const validTrace = selectedPorts.filter(p => {
+          if (t.report.reportFrom == p.reportFrom && t.report.port == p.port) {
+            return true
+          } 
+        })
+        if (validTrace.length > 0) return true
+        return false
+      })
+
+      console.log('Iterating Trace after ports', iteratingLocalFilter.current)
+    } 
+
     if (selectedL2Callsigns.length > 0) {
       console.log('selected callsigns', selectedL2Callsigns)
       iteratingLocalFilter.current = iteratingLocalFilter.current.filter(t => {
@@ -242,7 +339,7 @@ function App() {
       console.log('Iterating Trace after L2 Callsigns', iteratingLocalFilter.current)
     }     
 
-    // STEP 2 of 3
+    // STEP 3 of 3
     // Filter the overall traces array based on the selected options
     
     const localFilteredTraces = iteratingLocalFilter.current.filter(t => {
@@ -253,53 +350,7 @@ function App() {
       return true
     })
 
-    // STEP 3 of 3
-    // Iterate the filtered traces to extract source and destination callsigns 
-
-    const tmpSeenCcts = []
-    const tmpSeenCallsigns = []
-
-    localFilteredTraces.map(t => {
-      
-      if (selectedNetRomCircuits.length == 0 && t.report.ptcl == 'NET/ROM' && t.report.toCct) {
-        
-        // Add NET/ROM circuits
-        const circuitObject = {}
-        circuitObject.toCct = t.report.toCct
-        circuitObject.l3src = t.report.l3src
-        circuitObject.l3dst = t.report.l3dst
-
-        if (tmpSeenCcts.filter(c => JSON.stringify(c) === JSON.stringify(circuitObject)).length == 0) {
-          tmpSeenCcts.push(circuitObject)
-        }        
-
-        setSeenNetRomCircuits(tmpSeenCcts.sort((a,b) => a.toCct - b.toCct))
-      }
-
-      if (selectedL2Callsigns.length == 0) {
-        
-        // Add callsigns
-        const callsignArray = []
-        callsignArray.push(t.report.srce)
-        callsignArray.push(t.report.dest)
-
-        callsignArray.sort()
-
-        if (tmpSeenCallsigns.filter(t => JSON.stringify(t) === JSON.stringify(callsignArray)).length == 0) {
-          tmpSeenCallsigns.push(callsignArray)
-        }
-
-        setSeenCallsigns(tmpSeenCallsigns)
-
-      }
-
-    })
-
-    console.log('Seen NET/ROM Circuits', tmpSeenCcts)
-    console.log('Seen L2 Callsigns', tmpSeenCallsigns)
-
     setFilteredTraces(localFilteredTraces)
-    
     
   }
 
@@ -374,9 +425,9 @@ function App() {
           <Col>
             <div style={{ margin: '0.5rem 0rem 0.7rem 0rem', display: 'flex', alignItems: 'center' }}>
               <Image src={appIcon} style={{ height: '4em' }} />
-              <div style={{ margin: '0px 5px' }}>
+              <div style={{ margin: '0px 5px', width: '100%' }}>
                 <pre style={{ overflow: 'hidden', fontSize: '1.8em', marginBottom: '0px', lineHeight: '1em' }}>Pac-Mon</pre>
-                <pre style={{ marginLeft: '2px', marginBottom: '0px', whiteSpace: 'pre-wrap'  }}>Search, Filter and Analyse AX.25 Trace data</pre>
+                <pre style={{ marginLeft: '2px', marginBottom: '0px', whiteSpace: 'pre-wrap',  width: '100%'  }}><span style={{ display: 'inline-block' }}>Search, Filter and Analyse AX.25 Trace data</span><span style={{ display: 'inline-block', marginLeft: 'auto' }}> - Version {VERSION}</span></pre>
               </div>
               <hr />
             </div>
@@ -440,7 +491,7 @@ function App() {
           </Col>
         </Row>
           <Row style={{ display: toggleFilters ? 'none' : 'flex' }}>
-            <Col sm={6}>
+            <Col sm={4}>
               <Autocomplete
                 multiple
                 id="tags-outlined"
@@ -474,11 +525,45 @@ function App() {
                 }
               />
             </Col>
-            <Col sm={6}>
+            <Col sm={4}>
               <Autocomplete
                 multiple
                 id="tags-outlined"
-                options={seenCallsigns}
+                options={seenPorts}
+                getOptionLabel={(p) => `Port ${p.port} at ${p.reportFrom}`}
+                defaultValue={selectedPorts}
+                onChange={(event, value) => setSelectedPorts(value)}
+                sx={{
+                    "& .MuiOutlinedInput-root": {
+                        paddingTop: 0, paddingBottom: 0, marginBottom: '6px'
+                    },
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    placeholder="Seen Ports"
+                  />
+                )}
+                renderValue={(values, getItemProps) =>
+                    values.map((option, index) => {
+                      const { key, ...itemProps } = getItemProps({ index });
+                      return (
+                          <Chip
+                              key={key}
+                              label={`Port ${option.port} at ${option.reportFrom}`}
+                              {...itemProps}
+                              sx={{ fontSize: "0.9em", borderRadius: '5px', color: 'white', backgroundColor: 'purple', height: 'auto', padding: '2px', '& .MuiChip-deleteIcon': { color: 'white' } }}
+                          />
+                      );
+                    })
+                }
+              />
+            </Col>
+            <Col sm={4}>
+              <Autocomplete
+                multiple
+                id="tags-outlined"
+                options={seenL2Callsigns}
                 getOptionLabel={(sc) => `${sc[0]} <--> ${sc[1]}`}
                 defaultValue={selectedL2Callsigns}
                 onChange={(event, value) => setSelectedL2Callsigns(value)}
