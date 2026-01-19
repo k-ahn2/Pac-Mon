@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 const TraceComponentWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   padding: 0.1em 0em;
 `;
 
 const TraceRow = styled.div`
     display: flex;
+    flex: 1;
     flex-direction: row;
     font-family: Courier, monospace, 'Courier New';
 `
@@ -34,6 +36,7 @@ export const Trace = (props) => {
     const generateTags = () => {
         const tags = []
         
+        if (trace.l2Type == 'FRMR') tags.push(<Tag style={{ backgroundColor: 'red' }}>FRAME REJECT</Tag>)
         if (trace.l2Type == 'C') tags.push(<Tag style={{ backgroundColor: 'green' }}>CONN</Tag>)
         if (trace.l2Type == 'D') tags.push(<Tag style={{ backgroundColor: 'red' }}>DISC</Tag>)
         if (trace.l2Type == 'UA') tags.push(<Tag>ACK</Tag>)
@@ -98,6 +101,16 @@ export const Trace = (props) => {
                         { generateTags() }
                     </TraceData>                    
                 </TraceRow>
+                {
+                    trace.l3type == 'Routing info' && props.showOnlyRoutingInfo &&
+                    trace.nodes.map((route, index) => (
+                        <TraceRow key={index} style={{ margin: '0.1em 2em' }}>
+                            <TraceData>
+                                <Tag>{route.call}</Tag> <Tag style={{ backgroundColor: 'green' }}>Hops={route.hops}</Tag> <Tag style={{ backgroundColor: 'green' }}>{route.tt/100}s</Tag>
+                            </TraceData>
+                        </TraceRow>
+                    ))
+                }
             </TraceComponentWrapper>
         </>
     )

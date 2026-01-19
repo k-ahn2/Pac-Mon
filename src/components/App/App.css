@@ -2,6 +2,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  height: 100vh;
   max-height: 100vh;
 }
 
@@ -42,8 +43,9 @@
 }
 
 .traceContainer {
-  display: flex; 
+  width: 100%;
   cursor: pointer;
+  background-clip: content-box 
 }
 
 .traceContainer:hover {

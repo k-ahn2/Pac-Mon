@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react'
 import * as env from '../env/env.js'
-//import localApiSource from '../source/localApiSource.json'
 
 export const ApiContext = React.createContext({
   getTraces: () => {},
+  setRoutingInfoOnly: () => {},
+  routingInfoOnly: false,
   traces: {},
   recordCount: null,
   donwloadedRecordCount: null
@@ -11,13 +12,17 @@ export const ApiContext = React.createContext({
 
 export const ApiProvider = ({ children }) => {
 
-  const [traces, setTraces] = useState([])
-  const tracePages = useRef([])
-  const [recordCount, setRecordCount] = useState(0)
-  const [donwloadedRecordCount, setDownloadedRecordCount] = useState(0)
-  const counter = useRef(0)
-  const localRecordCount = useRef(0)
-
+  // Used whilst fetching traces, locally within the API Context
+  const tracePages = useRef([]) // Used to store pages of traces during fetching
+  const localRecordCount = useRef(0) // Used to store the total record count during fetching
+  const counter = useRef(0) // Used to count the number of pages fetched
+  
+  // Context state variables for traces and record counts
+  const [traces, setTraces] = useState([]) // All traces fetched from the API
+  const [routingInfoOnly, setRoutingInfoOnly] = useState(false);
+  const [recordCount, setRecordCount] = useState(0) // Total number of records available from the API
+  const [donwloadedRecordCount, setDownloadedRecordCount] = useState(0) // Number of records downloaded so far
+  
   const getNodes = async () => {
     const api = new URL(env.NODES_API_URL)
     const options = {
@@ -38,7 +43,14 @@ export const ApiProvider = ({ children }) => {
 
   const getTraces = async (queryParams) => {
 
-    const api = new URL(env.TRACES_API_URL)
+    let api;
+    // Set the URL based on L2 or L3 traces
+    if (routingInfoOnly && queryParams.get("l3type") === "Routing info") {
+      api = new URL(env.L3_TRACES_API_URL)
+    } else {
+      api = new URL(env.TRACES_API_URL)
+    }
+
     api.search = queryParams
 
     const options = {
@@ -52,12 +64,11 @@ export const ApiProvider = ({ children }) => {
     const fetchTraces = (cursor = null) => {
       
       if (!cursor) {
-
-        // First fetch - update state to display the data received
+        // First fetch - no cursor
         fetch(api, options).then((response) => response.json()).then((data) => {
           
-          counter.current = 1 // Reset the counter
-          tracePages.current = [...data.data]
+          counter.current = 1
+          tracePages.current = [...data.data] 
           localRecordCount.current = data.page.totalCount
           setRecordCount(data.page.totalCount)
           setTraces(tracePages.current)
@@ -67,25 +78,29 @@ export const ApiProvider = ({ children }) => {
         });
 
       } else {
-        
+        // Subsequent fetches - use cursor
         queryParams.set("cursor", cursor)
         api.search = queryParams
         
         fetch(api, options).then((response) => response.json()).then((data) => {
-          
+
+          console.log('Fetched Page', counter.current)
+
+          // Increment page counter and check if max download size reached
           counter.current += 1 
-          if (counter.current > 6) {
+          if (counter.current * env.API_PAGE_SIZE > env.MAX_PERMITTED_DOWNLOAD_SIZE) {
             setTraces(tracePages.current)
             return
           }
+          
           tracePages.current = [...tracePages.current, ...data.data]
-          console.log('Fetching Page', counter.current)
+          
           if (data.page.next) {
             setDownloadedRecordCount(counter.current * env.API_PAGE_SIZE)
             console.log(((counter.current * env.API_PAGE_SIZE)/localRecordCount.current)*100)
             fetchTraces(data.page.next)
           } else {
-            console.log('finshed', recordCount, tracePages.current.length)
+            console.log('Finshed', recordCount, tracePages.current.length)
             setDownloadedRecordCount(localRecordCount.current)
             setTraces(tracePages.current)
             tracePages.current = []
@@ -104,6 +119,8 @@ export const ApiProvider = ({ children }) => {
   const contextValues = { 
     traces,
     getTraces,
+    setRoutingInfoOnly,
+    routingInfoOnly,
     recordCount,
     donwloadedRecordCount
   }
