@@ -739,7 +739,7 @@ function App() {
                 />            
             </Col>
           </Row>
-          <Row style={{ display: toggleFilters ? 'none' : 'flex' }}>
+          <Row>
             <Col>
               <Badge style={{ padding: '0.5em 0em', width: '100%', marginBottom: '0rem'}} bg={"secondary"}>
                 {filteredTraces.length.toLocaleString()} Traces After Filtering
