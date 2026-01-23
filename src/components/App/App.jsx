@@ -531,16 +531,6 @@ function App() {
             <Button style={{ width: '100%' }} onClick={() => traceFetchHandler()}>Fetch Data</Button>
           </Col>
         </Row>
-        {/* <Row>
-          <Col sm={3} style={{ display: 'flex', alignItems: 'center', marginTop: '0.5rem' }}>
-              <Form.Check
-                type="switch"
-                label="Routing Info Only"
-                checked={routingInfoOnly}
-                onChange={(e) => setRoutingInfoOnly(e.target.checked)}
-              />
-          </Col>
-        </Row> */}
         <hr style={{ margin: '0.5rem 0rem' }}/>
         { traces.length > 0 && <>
         <Row>
@@ -631,7 +621,6 @@ function App() {
                 getOptionLabel={(sc) => `${sc[0]} <--> ${sc[1]}`}
                 defaultValue={selectedL2Callsigns}
                 onChange={(event, value) => setSelectedL2Callsigns(value)}
-                // defaultValue={[top100Films[0]]}
                 sx={{
                     "& .MuiOutlinedInput-root": {
                         paddingTop: 0, paddingBottom: 0, marginBottom: '6px'
@@ -758,7 +747,13 @@ function App() {
                   return null
                 } else {
                   return <div className="traceContainer" onClick={() => setShowJson(t)}>
-                    <Trace trace={t} showOnlyRoutingInfo={showOnlyRoutingInfo} showSequenceCounters={showSequenceCounters} showPayLen={showPayLen} showNetRomDetails={showNetRomDetails}/>
+                    <Trace 
+                      trace={t} 
+                      showOnlyRoutingInfo={showOnlyRoutingInfo} 
+                      showSequenceCounters={showSequenceCounters} 
+                      showPayLen={showPayLen} 
+                      showNetRomDetails={showNetRomDetails}
+                    />
                   </div>
                 }
               })

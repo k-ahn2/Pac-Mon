@@ -61,7 +61,6 @@ export const Trace = (props) => {
         if (props.showNetRomDetails && 'rxSeq' in trace && trace.l3dst != 'L3RTT') tags.push(<Tag style={{ backgroundColor: 'green' }}>R{trace.rxSeq}</Tag>)
 
         if (props.showPayLen && trace.payLen) tags.push(<Tag>plen={trace.payLen}</Tag>)
-        // if (props.showPayLen && trace.ilen) tags.push(<Tag>ilen={trace.ilen}</Tag>)
 
         return tags
     }
