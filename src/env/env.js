@@ -7,4 +7,4 @@ export const NODES_API_URL = `${BASE_URL}/nodes`
 export const API_PAGE_SIZE = 500
 export const MAX_PERMITTED_DOWNLOAD_SIZE = 5000
 
-export const VERSION = '0.7'
+export const VERSION = '0.8'

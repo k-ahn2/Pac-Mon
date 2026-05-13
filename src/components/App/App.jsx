@@ -136,15 +136,15 @@ function App() {
       const urlShowOnlyRoutingInfo = urlParams.get('shori')
 
       if (urlTraceStart.isValid()) {
-        setTraceStart(urlTraceStart)
+        setTraceStart(urlTraceStart.utc())
       } else {
-        setTraceStart(moment().subtract(15,'minutes'))
+        setTraceStart(moment().utc().subtract(15,'minutes'))
       }
 
       if (urlTraceEnd.isValid()) {
-        setTraceEnd(urlTraceEnd)
+        setTraceEnd(urlTraceEnd.utc())
       } else {
-        setTraceEnd(moment())
+        setTraceEnd(moment().utc())
       }
 
       if (urlReportFrom) setTraceReportFrom(urlReportFrom)
@@ -503,7 +503,7 @@ function App() {
             <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="en-gb">
               <DateTimePicker 
                 sx={{ width: '100%' }}
-                label="Trace Start"
+                label="Trace Start (UTC)"
                 format="DD/MM/YYYY HH:mm:ss"
                 slotProps={{ textField: { size: 'small' } }}
                 value={traceStart}
@@ -517,7 +517,7 @@ function App() {
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <DateTimePicker 
                 sx={{ width: '100%' }}
-                label="Trace End"
+                label="Trace End (UTC)"
                 format="DD/MM/YYYY HH:mm:ss"
                 slotProps={{ textField: { size: 'small' } }}
                 value={traceEnd}

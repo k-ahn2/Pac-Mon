@@ -70,7 +70,7 @@ export const Trace = (props) => {
             <TraceComponentWrapper>
                 <TraceRow>
                     <TraceData onClick={() => setShowJsonModal(true)}>
-                        {timestamp.toLocaleTimeString()}
+                        {timestamp.getUTCHours().toString().padStart(2, '0')}:{timestamp.getUTCMinutes().toString().padStart(2, '0')}:{timestamp.getUTCSeconds().toString().padStart(2, '0')}
                     </TraceData>
                     <TraceData>
                         {trace.reportFrom}
